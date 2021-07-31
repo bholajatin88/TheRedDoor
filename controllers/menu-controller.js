@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'), Menu = mongoose.model('menus');
 var SetItemInStore = require('../common/store').SetItemInStore;
-var GetInitial = require('../common/util').GetInitial;
+var GetUserInitial = require('../common/util').GetUserInitial;
 
 module.exports={
     GetMenuItem: function(menu_id) {
@@ -11,12 +11,11 @@ module.exports={
 
     GetAllMenuItems: function(req, res){
         Menu.find({},function(err, result){
-            if(err) {console.log(err); throw err;}
+            if(err) { throw err;}
             else{
-                
-                console.log(result.length);
-
-                res.render("foodMenu.ejs",{menu_items:result});
+                var urerInitial = GetUserInitial();
+                urerInitial.menu_items = result;
+                res.render("foodMenu.ejs",urerInitial);
             }
             
         });

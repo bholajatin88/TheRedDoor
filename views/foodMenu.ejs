@@ -37,7 +37,11 @@
 			<div class="menuHeader">Menu
 				<hr class="menu-hr">
 				<div class="menu-background">
-					
+					<% for (var i=0; i<menu_items.length; i++){ %>
+						
+							<p><%= menu_items[i].item_name %> &nbsp;</p>
+						
+						<%}%>
 					
 					<div class="menu-content">
 					<div class="circle70"></div>
