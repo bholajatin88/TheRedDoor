@@ -1,0 +1,446 @@
+@font-face {
+    font-family: 'Raleway-Light';
+    src: url('../fonts/Raleway-Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'WithsandDemoBounce';
+    src: url('../fonts/WithsandDemoBounce.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ARIZON';
+    src: url('../fonts/ARIZON.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media only screen and (max-width: 1340px) {
+	[class*="circle"]{
+		display:none !important;
+	}
+	
+	.floatRight img{
+		margin-left: -3000% !important;
+	}
+	
+	[class="menu-items-right"]{
+		font-size: 25% !important;
+	}
+	
+	[class="menu-items"]{
+		font-size: 25% !important;
+	}
+	
+	[class="foodLabels"]{
+		font-size: 10px !important;
+	}
+}
+
+@media only screen and (max-width: 770px) {
+	[class="navLink"] {
+		display: none !important;
+	}
+
+	[class="menu-item-selected mobile"]
+	{
+		display: block !important;
+		background-color: red !important;
+	}
+
+	[class="mobile"]{
+		display: block !important;
+	}
+	
+	[class="mainContent"]{
+		padding-top: 30% !important;
+	}
+	
+	[class="foodImgDiv displayTableCell floatRight"]{
+		float: none !important;
+	}
+	
+	[class="foodImg"]{
+		width: 150px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		display: block !important;
+	}
+	
+	[class="menu-items"]{
+		width: 90% !important;
+		font-size: 25% !important;
+	}
+	
+	[class="menu-content"]{
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+	}
+	
+	[class="menu-background"]{
+		width: 95% !important;
+	}
+	
+	[class="mainContent"]{
+		padding-left: 3.5% !important;
+	}
+	
+	[class="foodLabels"]{
+		font-size: 10px !important;
+		text-align: center !important;
+		margin-right: 0px !important;
+	}
+	
+	[class="menu-items-right"]{
+		font-size: 25% !important;
+		padding-left: 5% !important;
+		padding-right: 5% !important;
+		width: 90% !important;
+	}
+	
+	[class="displayTableCell foodImgDiv floatLeft paddingLeft4"]{
+		float: none !important;
+	}
+	
+	.floatRight img{
+		margin-left: auto !important;
+	}
+	
+	[class="menu-hr"]{
+		width: 93% !important;
+	}
+	
+	[class="container"]{
+		margin-top: 22%;
+		width:85%;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	[class="menu-items-right"]{
+		font-size: 20% !important;
+	}
+	
+	[class="foodLabels"]{
+		font-size: 8px !important;
+	}
+	
+	[class="container"]{
+		margin-top: 35%;
+		width:75%;
+	}
+}
+
+.aquatic{
+    font-family:'Timeline';
+}
+
+.withsand{
+	font-family:'WithsandDemoBounce';
+}
+
+.navLink {
+	width: 80%;
+	position: absolute;
+	left: 160px;
+}
+
+.navLink a{
+	font-family: 'Raleway-Light';
+    color: white;
+    font-size: 20px;
+	padding: 16px 40px 20px 40px;
+    font-weight: bold;
+    text-decoration-line: none;
+    display: table-cell;
+	white-space: nowrap;
+}
+
+.navBar{
+	position: fixed;
+	top: 0px;
+	background-color: #cc0000;
+    display: flex;
+	width: 100%;
+    height: 60px;
+	z-index: 10;
+}
+
+.navBg{
+    opacity: 0.9;
+}
+
+.logoImg{
+	height: 155px;
+	content:url(../images/logo-up.png);
+	border-radius: 15%;
+}
+
+.bodyBackground{
+	background-image: url(../images/spice-pasta-lunch-top-fresh.jpg);
+    background-size: cover;
+}
+
+.mainContent{
+	display: block;
+	padding-left: 13.5%;
+    padding-top: 12%;
+}
+.menuHeader{
+	color: white;
+	font-family: 'ARIZON';
+    font-size: 350%;
+    font-weight: 100;
+}
+.menu-hr{
+	width: 83%;
+    margin-left: 0.5%;
+}
+
+[class="bar"] {
+	display: table-cell !important;
+}
+
+.bar:hover + .menubar-list{
+	display: table-cell !important;
+}
+
+.menubar-list:hover {
+	display: table-cell !important;
+}
+
+.menu-background{
+	background-color: #e6e6e6;
+    width: 85%;
+	font-family: WithsandDemoBounce;
+	color: #595959;
+}
+	
+.menu-content{
+	display: block;
+    padding: 30px;
+}
+
+.menu-head{
+	text-align: center;
+}
+
+.menu-items{
+	display: block;
+    font-family: Raleway-Light;
+    font-size: 35%;
+    padding-left: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-right: 5%;
+    width: 50%;
+}
+
+.menu-items-right{
+	display: block;
+    font-family: Raleway-Light;
+    font-size: 35%;
+    padding-left: 47%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-right: 2%;
+    width: 50%;
+}
+
+.displayTableCell{
+	display: table-cell;
+    white-space: nowrap;
+    width: 1%;
+}
+
+.menu-classic-dot {
+    display: table-cell;
+    width: 98%;
+    border-bottom: 1px dotted #000000;
+}
+
+.menu-item-desc{
+    font-size: 75%;
+    font-style: italic;
+
+}
+
+.menu-item-content{
+	padding-bottom: 3%;
+	display: inline-block;
+}
+
+.chiliImg{
+	content:url(../images/chili.png);
+	width: 15px;
+}
+
+.vegImg{
+	content:url(../images/vegetarian.png);
+	width: 15px;
+}
+
+.chefImg{
+	content:url(../images/chef.png);
+	width: 18px;
+}
+
+.floatLeft{
+	float: left;
+}
+
+.floatRight{
+	float: right;
+}
+
+.foodImgDiv{
+	padding-top: 6%;
+	padding-right: 4%;
+}
+
+.foodImg{
+	width: 3500%;
+	max-width: 370px;
+    border-radius: 20px;
+}
+
+.food-item-desc-left{
+	width: 65%;
+    display: inline-block;
+	padding-top: 13%;
+}
+
+.paddingRight5 {
+    padding-right: 5%;
+}
+
+.paddingLeft4 {
+	padding-left: 4%
+}
+
+.circle350
+  {
+    border-radius: 50%;
+	width: 350px;
+	height: 350px;
+    border: 10px solid indianred;
+    display: inline-flex;
+    background-color: indianred;
+    float: right;
+	margin-left: -1%;
+  }
+  
+.circleleft{
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    border: 10px solid lightgrey;
+    display: inline-flex;
+    background-color: lightgrey;
+    float: left;
+	margin-right: -40%;
+    margin-top: 0%;
+  }
+  
+ .circleRight{
+    width: 350px;
+    height: 345px;
+	overflow: inherit;
+    border: 10px solid indianred;
+    display: inline-flex;
+    background-color: indianred;
+    float: right;
+    margin: -3%;
+	border-radius: 50% 50% 0% 50%;
+ }
+  
+.circle70 {
+    margin: -30px;
+    overflow: inherit;
+    width: 70px;
+    height: 70px;
+    border: 10px solid grey;
+    background-color: grey;
+    border-radius: 0px 0px 80px 0px;
+}
+
+.foodLabels{
+	font-family: Raleway-Light;
+	font-size: 13px;
+	text-align: right;
+	margin-right: 37%;
+}
+
+.foodLabels img{
+	vertical-align: middle;
+}
+
+.foodLabels .chefImg{
+	vertical-align: bottom;
+}
+
+.menu-item-selected{
+	background-color: grey;
+}
+
+.bar {
+	cursor: pointer;
+	width: 40px;
+    height: 40px;
+	position: absolute;
+    right: 20px;
+	padding: 5px;
+	border-radius: 50px;
+	border: 1px solid black;
+	text-align: center;
+	color: pink;
+    background: black;
+	font-weight: bold;
+	font-size: 35px;
+    z-index: 2;
+	top: 6px;
+}
+
+.mobile {
+	display: none;
+}
+
+.menubar-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 140px;
+  height:fit-content;
+  background-color: gray;
+  color:#cc0000;
+  display: none;
+  position:absolute;
+  right: 8px;
+  top: 60px;
+}
+
+.right {
+	left: 400px;
+}
+
+.menubar-list li {
+	text-align: center;
+    width: 95%;
+    vertical-align: middle;
+    padding-top: 10px;
+	border: 3px solid black;
+	height: 30px;
+	text-align: center;
+}
+
+.menubar-list li a {
+	font-family: 'Raleway-Light';
+	color: white;
+	padding: 8px 16px;
+	text-decoration-line: none;
+}
+

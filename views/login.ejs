@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="UTF-8">
+    <head>
+        <title>Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function(){
+                if ($('.error').length > 0) {
+                $('.error').remove();
+                }
+            }, 3000);
+            });
+        </script>
+    </head>
+    <link href="css/login.css" rel="stylesheet" type="text/css">
+	<body>
+        <a class="container-top" href="/home">
+            <img class="back-img" src="/images/back.png">
+            Back Home
+        </a>
+        <div class="container">
+            <form action="/login" method="POST">
+                <label class="head">Login</label>
+                <br><br>
+                <% if (error != false) { %>
+                    <div class="error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <label for="username"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="username" required>
+            
+                <label for="password"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password" required>
+                
+                <button type="submit">Login</button>
+                <a class="register" href="/register">Register</a>
+            </form>
+        </div>
+    </body>
+</html>

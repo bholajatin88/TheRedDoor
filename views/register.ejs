@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="UTF-8">
+    <head>
+        <title>Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function(){
+                if ($('.error').length > 0) {
+                $('.error').remove();
+                }
+            }, 5000);
+            });
+        </script>
+    </head>
+    <link href="css/register.css" rel="stylesheet" type="text/css">
+	<body>
+        <a class="container-top" href="/home">
+            <img class="back-img" src="/images/back.png">
+            Back Home
+        </a>
+        <div class="container">
+            <form action="/register" method="POST">
+                <label class="head">Register</label>
+                <br><br>
+                <% if (error != false && error.invalidUsername) { %>
+                    <div class="error">
+                        <%= error.invalidUsername %>
+                    </div>
+                    <br>
+                <% } %>
+                <label for="username"><b>Username*</b></label>
+                <input type="text" placeholder="Enter Username" value='<%=form.username%>' name="username" required><br>
+                <label for="email"><b>Email*</b></label>
+                <input type="text" placeholder="Enter Email" value='<%=form.email%>' name="email" required><br>
+                <% if (error != false) { %>
+                    <div class="error">
+                        <%= error.email %>
+                    </div>
+                <% } %>
+                <label for="password"><b>Password*</b></label>
+                <input type="password" placeholder="Enter Password" value='<%=form.password%>' name="password" required><br>
+                <% if (error != false) { %>
+                    <div class="error">
+                        <%= error.password %>
+                    </div>
+                <% } %>
+                <label for="phone"><b>Phone Number*</b></label>
+                <input type="text" placeholder="Enter Phone No." value='<%=form.phone%>' name="phone" required><br>
+                <% if (error != false) { %>
+                    <div class="error">
+                        <%= error.phone %>
+                    </div>
+                <% } %>
+                <br><br><label class="address">Address</label><br><br>
+                <label for="phone"><b>Street*</b></label>
+                <input type="text" placeholder="Enter Street" value='<%=form.street%>' name="street" required><br>
+                <label for="address_line_2"><b>Address Line 2</b></label>
+                <input type="text" placeholder="Enter Address Line 2" value='<%=form.address_line_2%>' name="address_line_2"><br>
+                <label for="city"><b>City*</b></label>
+                <input type="text" placeholder="Enter City" name="city" value='<%=form.city%>' required><br>
+                <label for="state"><b>Province*</b></label>
+                <input type="text" placeholder="Enter Province" name="state" value='<%=form.state%>' required><br>
+                <label for="postalCode"><b>Postal Code*</b></label>
+                <input type="text" placeholder="Enter Postal Code" name="postalCode" value='<%=form.postalCode%>' required><br>
+                <% if(edit) { %>
+                    <input type="hidden" name="updateProfile" value="true">
+                    <button type="submit">Update Profile</button>
+                <% } else { %>
+                    <button type="submit">Register and Login</button>
+                    <a class="register" href="/login">Back To Login</a>
+                <% } %>
+            </form>
+        </div>
+    </body>
+</html>

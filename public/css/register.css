@@ -1,0 +1,98 @@
+body {
+  background-image: url('/images/background.jpg');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container-top {
+  position: absolute;
+  text-align: center;
+  margin-left: 30%;
+  padding-top: 40px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+}
+
+.back-img {
+  margin-top: 1px;
+  width: 20px;
+  height: 18px;
+  vertical-align: top;
+}
+
+.container-top:hover  {
+  text-decoration: none;
+  color: black;
+}
+
+.container {
+    width: 30%;
+    background-color:gray;
+    padding: 100px;
+    padding-left: 120px;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.head {
+  color: #04AA6D;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+input[type=text], input[type=password] {
+    margin-left: 10px;
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  label {
+      width: 120px;
+      display: inline-block;
+      color: white;
+  }
+
+  .address {
+      font-weight: bold;
+      font-size: 35px;
+  }
+
+  .register {
+    padding-left: 10px;
+    text-decoration: none;
+    background: gray;
+    width: 80%;
+    display: block;
+    padding-top: 10px;
+    height: 30px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .error {
+      color: red;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border: none;
+    cursor: pointer;
+    width: 88%;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+}

@@ -1,0 +1,43 @@
+
+
+.container{
+	width:65%;
+	background :rgba(0,0,0,.6);
+	padding: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+}
+
+
+
+.container h2{
+	color:white;
+	margin-top:50px;
+	position:leftwards;
+	left:-20px;
+}
+
+.container p{
+	color:white;
+	margin-top:5%;
+	font-family: 'Raleway-Light';
+	line-height: 150%;
+	font-size: 18px;
+	font-weight: 900;
+}
+
+.container span{
+	color:white;
+	margin-top:50px;
+	font-family: WithsandDemoBounce;
+	font-size: 350%;
+}
+
+
+
+
+
+
+
+

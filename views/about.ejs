@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+		<title>About us</title>
+		<link href="css/about.css" rel="stylesheet" type="text/css">
+		<link href="css/foodMenu.css" rel="stylesheet" type="text/css">
+	</head>
+
+<body class="bodyBackground">
+	<div class="navBg">
+		<nav class="navBar">
+			<img class="logoImg">
+			<span class="navLink">
+				<a href="/home">Home</a>
+				<a href="/menu">Menu</a>
+				<a class="menu-item-selected" href="/about">About Us</a>
+				<a href="/contact">Contact Us</a>
+				<% if(!userInitial) { %>
+					<a href="/login">Login/Register</a>
+				<% } %>
+			</span>
+			<% if(userInitial) { %>
+				<div class="bar"><%=userInitial%></div>
+			<% } %>
+			<ul class="menubar-list">
+				<li class="mobile"><a href="/home">Home</a></li>
+				<li class="mobile"><a href="/menu">Menu</a></li>
+				<li class="menu-item-selected mobile"><a href="/about">About Us</a></li>
+				<li class="mobile"><a href="/contact">Contact Us</a></li>
+				<% if(!userInitial) { %>
+					<li class="mobile"><a href="/login">Login/Register</a></li>
+				<% } else { %>
+					<li><a href="/logout">LogOut</a></li>
+				<% } %>
+			</ul>
+		</nav>
+	</div>
+	<div class="container">
+			<center>
+				<span>About us</span>
+				<div class="img"></div>
+				<p>
+					Everything began in 2010 when the proprietor opened this shop. 
+					It was gigantically fruitful and this driven us to begin another online delivery of food.
+					Today, it can be found Canada in the excess of nearly 100 cities. 
+					We have more than 100 restaurants and 1500 team members with more than 10000 customers
+					and Furthermore,presently we are going to provide services in India. We never stop to driving ourselves to drive delicious food , and fast every-time and enjoy anywhere at any time.<br>
+					What we are about ?
+					We just do not provide food , but also try to make people happy.
+					 This restaurant has built on the belief that we follow the principles and know that how to make customers satisfy.
+					 We create food and feel proud because we can provide services on time with fast delivery.
+					In this restaurant heavy discount offeres are provided on Wednesday and  end of the weekend. The  permanent members can get the free occasional food delivery with precious gifts.
+					With the presence of food ordering website, food eaters do not need to leave their comfort because free home delivery services are provided at around 100acres of area coverage.
+					We can help the customers by providing the credit card and cash on delivery services.
+					If customers are not happy with services they can complaint and get free another same food item with in 30 minutes.
+				</p>
+			</center>
+		
+	</div>
+</body>
+</html>
+

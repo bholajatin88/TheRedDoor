@@ -1,0 +1,92 @@
+body {
+  background-image: url('/images/background.jpg');
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container {
+    width: 20%;
+    background-color:gray;
+    padding: 100px;
+    padding-left: 150px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.container-top {
+  position: absolute;
+  text-align: center;
+  margin-left: 35%;
+  padding-top: 40px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+}
+
+.back-img {
+  margin-top: 1px;
+  width: 20px;
+  height: 18px;
+  vertical-align: top;
+}
+
+.container-top:hover  {
+  text-decoration: none;
+  color: black;
+}
+
+input[type=text], input[type=password] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  label {
+      color: white;
+      display: block;
+      width: 80%;
+  }
+
+  .register {
+    text-decoration: none;
+    background: black;
+    width: 80%;
+    display: block;
+    padding-top: 10px;
+    height: 30px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .error {
+      color: red;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+}
+
+.head {
+    color: #04AA6D;
+    font-size: 30px;
+    font-weight: bold;
+}
+  
+.register:hover, button:hover {
+    width: 80%;
+    opacity: 0.8;
+}

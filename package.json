@@ -1,0 +1,33 @@
+{
+  "name": "thereddoor",
+  "version": "1.0.0",
+  "description": "This is a front end web application for TheRedDoor Restaurant",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bholajatin88/TheRedDoor.git"
+  },
+  "keywords": [
+    "restaurant",
+    "web",
+    "application",
+    "node",
+    "express",
+    "mongoose",
+    "ejs",
+    "github"
+  ],
+  "author": "Jatin Kumar Bhola, Kriti Kriti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bholajatin88/TheRedDoor/issues"
+  },
+  "homepage": "https://github.com/bholajatin88/TheRedDoor#readme",
+  "dependencies": {
+    "node-localstorage": "^2.2.1",
+    "serve-favicon": "^2.5.0"
+  }
+}
