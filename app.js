@@ -25,8 +25,6 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 DbConnect();
 Store();
 
-//require('./models/moviemodel');
-//var movieController = require('./controllers/moviecontroller');
 app.get('/home', function(req, res) {
     res.render('home.ejs', GetUserInitial());
 });
@@ -106,7 +104,7 @@ app.post('/register', function(req, res) {
     }
 });
 
-// middleware to catch non-existing routes
+// middleware to catch exceptions
 app.use(function(error, req, res, next) {
     console.error(error);
     res.status(500).render('error.ejs');
