@@ -23,24 +23,24 @@ app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //common file to create db connection
 DbConnect();
-Store();
+Store(app);
 
 app.get('/home', function(req, res) {
-    res.render('home.ejs', GetUserInitial());
+    res.render('home.ejs', GetUserInitial(req));
 });
 
 app.get('/', function(req, res) {
-    res.render('home.ejs', GetUserInitial());
+    res.render('home.ejs', GetUserInitial(req));
 });
 
 app.get('/login', function(req, res) {
-    let loginInitial = GetUserInitial();
+    let loginInitial = GetUserInitial(req);
     loginInitial["error"] = false;
     res.render('login.ejs', loginInitial);
 });
 
 app.get('/register', function(req, res) {
-    let registerInitial = GetUserInitial();
+    let registerInitial = GetUserInitial(req);
     registerInitial["error"] = false;
     registerInitial["form"] = false;
     registerInitial["edit"] = false;
@@ -48,7 +48,7 @@ app.get('/register', function(req, res) {
 });
 
 app.get('/editprofile', function(req, res) {
-    let userDetails = JSON.parse(GetItemFromStore("userDetails"));
+    let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
     addressController.GetAddress(userDetails.address_id).then(function(userAddress) {
         if(userAddress) {
             let address = {
@@ -65,7 +65,7 @@ app.get('/editprofile', function(req, res) {
             console.log('Error while updating address');
             throw exception;
         }
-        let registerInitial = GetUserInitial();
+        let registerInitial = GetUserInitial(req);
         registerInitial["error"] = false;
         registerInitial["edit"] = true;
         registerInitial["form"] = userDetails? userDetails : false;
@@ -76,23 +76,23 @@ app.get('/editprofile', function(req, res) {
 });
 
 app.get('/menu', function(req, res) {
-    let details = GetUserInitial();
+    let details = GetUserInitial(req);
     console.log(details);
     menu_items = menuController.GetAllMenuItems(req,res,details);      
     res.render('foodMenu.ejs', details);
 });
 
 app.get('/contact', function(req, res) {
-    res.render('contact.ejs', GetUserInitial());
+    res.render('contact.ejs', GetUserInitial(req));
 });
 
 app.get('/about', function(req, res) {
-    res.render('about.ejs', GetUserInitial());
+    res.render('about.ejs', GetUserInitial(req));
 });
 
 app.get('/logout', function(req, res) {
-    RemoveItemFromStore("userDetails");
-    res.render('home.ejs', GetUserInitial());
+    RemoveItemFromStore(req,"userDetails");
+    res.render('home.ejs', GetUserInitial(req));
 });
 
 app.post('/login', userController.Login);
