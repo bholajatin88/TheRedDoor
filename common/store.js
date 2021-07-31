@@ -13,8 +13,8 @@ module.exports.Store = () => {
 
 module.exports.SetItemInStore = (key, value) => {
     try {
-            localStorage.setItem(key, value);
-            return 'success';
+        localStorage.setItem(key, value);
+        return 'success';
     } catch (e) {
         console.log('Error while adding item in local storage');
         throw e;

@@ -22,7 +22,11 @@
         </a>
         <div class="container">
             <form action="/register" method="POST">
-                <label class="head">Register</label>
+                <% if(edit) { %>
+                    <label class="head">Edit Profile</label>
+                <% } else { %>   
+                    <label class="head">Register</label>
+                <% } %>
                 <br><br>
                 <% if (error != false && error.invalidUsername) { %>
                     <div class="error">
