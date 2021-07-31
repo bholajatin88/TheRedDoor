@@ -13,10 +13,6 @@ module.exports.Store = () => {
 
 module.exports.SetItemInStore = (key, value) => {
     try {
-            if (typeof localStorage === "undefined" || localStorage === null) {
-                var LocalStorage = require('node-localstorage').LocalStorage;
-                localStorage = new LocalStorage('./scratch');
-            }
             localStorage.setItem(key, value);
             return 'success';
     } catch (e) {
@@ -27,10 +23,6 @@ module.exports.SetItemInStore = (key, value) => {
 
 module.exports.GetItemFromStore = (key) => {
     try {
-        if (typeof localStorage === "undefined" || localStorage === null) {
-            var LocalStorage = require('node-localstorage').LocalStorage;
-            localStorage = new LocalStorage('./scratch');
-        }
         return localStorage.getItem(key);
     } catch (e) {
         console.log('Error while getting item from local storage');
@@ -40,10 +32,6 @@ module.exports.GetItemFromStore = (key) => {
 
 module.exports.RemoveItemFromStore = (key) => {
     try {
-        if (typeof localStorage === "undefined" || localStorage === null) {
-            var LocalStorage = require('node-localstorage').LocalStorage;
-            localStorage = new LocalStorage('./scratch');
-        }
         localStorage.removeItem(key);
     } catch (e) {
         console.log('Error while removing item from local storage');

@@ -109,7 +109,7 @@ try {
 
     // middleware to catch non-existing routes
     app.use(function(req, res, next) {
-        console.log('----------------------------------err-------------------------------------------')
+        console.log('----------------------------------err-------------------------------------------');
         res.render('not-found.ejs');
     });
 
