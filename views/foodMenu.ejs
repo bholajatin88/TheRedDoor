@@ -21,6 +21,7 @@
 				<div class="bar"><%=userInitial%></div>
 			<% } %>
 			<ul class="menubar-list">
+				
 				<li class="mobile"><a href="/home">Home</a></li>
 				<li class="menu-item-selected mobile"><a href="/menu">Menu</a></li>
 				<li class="mobile"><a href="/about">About Us</a></li>
@@ -28,7 +29,6 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<li><a href="/editprofile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
 			</ul>
@@ -37,7 +37,8 @@
 			<div class="menuHeader">Menu
 				<hr class="menu-hr">
 				<div class="menu-background">
-				
+					
+					
 					<div class="menu-content">
 					<div class="circle70"></div>
 						<div class="menu-head">Italian</div>
