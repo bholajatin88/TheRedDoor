@@ -14,8 +14,8 @@ module.exports.GetInitial = (userDetails) => {
     }
 }
 
-module.exports.GetUserInitial = () => {
+module.exports.GetUserInitial = (req) => {
     var GetItemFromStore = require('./store').GetItemFromStore;
-    var userDetails = JSON.parse(GetItemFromStore("userDetails"));
+    var userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
     return { userInitial: this.GetInitial(userDetails) };
 }

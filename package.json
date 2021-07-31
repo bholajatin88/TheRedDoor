@@ -29,8 +29,8 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "mongoose": "^5.13.5",
-    "node-localstorage": "^2.2.1",
     "serve-favicon": "^2.5.0"
   }
 }

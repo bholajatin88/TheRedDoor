@@ -1,39 +1,48 @@
-module.exports.Store = () => {
+var session = require('express-session');
+
+module.exports.Store = (app) => {
     try {
-        if (typeof localStorage === "undefined" || localStorage === null) {
-            var LocalStorage = require('node-localstorage').LocalStorage;
-            localStorage = new LocalStorage('C:\\scratch');
-        }
-        localStorage.clear();
+        app.set('trust proxy', 1)
+        app.use(session({
+            secret: 'keyboard cat',
+            resave: false,
+            saveUninitialized: true
+        }));
     } catch (e) {
-        console.log('Error while creating local storage');
+        console.log('Error while creating session storage');
         throw e;
     }
 }
 
-module.exports.SetItemInStore = (key, value) => {
+module.exports.SetItemInStore = (req, key, value) => {
     try {
-        localStorage.setItem(key, value);
+        req.session[key] = value;
+        req.session.save();
         return 'success';
     } catch (e) {
-        console.log('Error while adding item in local storage');
+        console.log('Error while adding item in session storage');
         throw e;
     }
 }
 
-module.exports.GetItemFromStore = (key) => {
+module.exports.GetItemFromStore = (req, key) => {
     try {
-        return localStorage.getItem(key);
+        if(req.session && req.session[key]) {
+            return req.session[key];
+        }
+        return null;
     } catch (e) {
-        console.log('Error while getting item from local storage');
+        console.log('Error while getting item from session storage');
         throw e;
     }
 }
 
-module.exports.RemoveItemFromStore = (key) => {
+module.exports.RemoveItemFromStore = (req, key) => {
     try {
-        localStorage.removeItem(key);
+        req.session[key] = null;
+        req.session.save();
+        return 'success';
     } catch (e) {
-        console.log('Error while removing item from local storage');
+        console.log('Error while removing item from session storage');
     }
 }

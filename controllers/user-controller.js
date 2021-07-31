@@ -21,7 +21,7 @@ module.exports={
                 throw err;
             } else {
                 if(results && results.length > 0) {
-                    SetItemInStore("userDetails", JSON.stringify(results[0]));
+                    SetItemInStore(req, "userDetails", JSON.stringify(results[0]));
                     res.render('home.ejs', {userInitial: GetInitial(results[0])});
                 } else {
                     res.render('login.ejs', {error: "Invalid login username or password"});
@@ -68,7 +68,7 @@ module.exports={
                         };
                         User.create(user)
                         .then(function(newUser) {
-                            SetItemInStore("userDetails", JSON.stringify(newUser));
+                            SetItemInStore(req, "userDetails", JSON.stringify(newUser));
                             res.render('home.ejs', {userInitial: GetInitial(newUser)});
                         })
                         .catch(function(err) {
@@ -121,7 +121,7 @@ module.exports={
                         city: body.city.trim(),
                         state: body.state.trim()
                     }
-                    var result = JSON.parse(GetItemFromStore("userDetails"));
+                    var result = JSON.parse(GetItemFromStore(req, "userDetails"));
                     Address.updateOne({_id: {$eq: result.address_id}},address).collation( { locale: 'en', strength: 1 })
                     .then(function(newAddress) {
                         let user = {
@@ -133,8 +133,8 @@ module.exports={
                         };
                         User.updateOne({_id: {$eq: result._id}},user).collation( { locale: 'en', strength: 1 })
                         .then(function(newUser) {
-                            RemoveItemFromStore("userDetails");
-                            SetItemInStore("userDetails", JSON.stringify(user));
+                            RemoveItemFromStore(req, "userDetails");
+                            SetItemInStore(req, "userDetails", JSON.stringify(user));
                             res.render('home.ejs', {userInitial: GetInitial(user)});
                         })
                         .catch(function(err) {
