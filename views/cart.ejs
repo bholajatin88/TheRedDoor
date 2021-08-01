@@ -1,0 +1,6 @@
+<% if(!userInitial && cartCount > 0) { %>
+    <a href='/checkout'>
+        <img class='cart-img' src="images/cart.png">
+        <div class="cart-count"><%= cartCount %></div>
+    </a>
+<% } %>

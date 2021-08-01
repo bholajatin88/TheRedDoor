@@ -21,7 +21,7 @@ $(document).ready(function(){
                 type: "POST",
                 data: selectedItem,
                 success: function(result){
-                        console.log(result);
+                        $('.cart').html(result);
                 }
         });
     });

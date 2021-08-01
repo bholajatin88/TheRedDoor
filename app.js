@@ -1,7 +1,7 @@
 const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var {Store, RemoveItemFromStore, SetItemInStore} = require('./common/store');
+var {Store, RemoveItemFromStore} = require('./common/store');
 const port = 80;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -12,13 +12,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 require('./models/address-model');
 require('./models/user-model');
-require('./models/menu-model');
 var userController = require('./controllers/user-controller');
-var addressController = require('./controllers/address-controller');
+require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var { GetUserInitial, GetBaseInitial } = require('./common/util');
-var { SetItemInStore, GetItemFromStore } = require('./common/store');
+var { GetBaseInitial, UpdateCart } = require('./common/util');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //common file to create db connection
@@ -74,20 +72,12 @@ app.post('/register', function(req, res) {
 });
 
 app.post('/addItemToCart',function(req, res) {
-    let selectedItem = req.body;
-    let currentItems = JSON.parse(GetItemFromStore(req, "cart"));
-    let cartItems = [];
-    if(currentItems) {
-        cartItems = [...currentItems];
-    }
-    cartItems.push(selectedItem);
-    SetItemInStore(req, "cart", JSON.stringify(cartItems));
+    UpdateCart(req);
+    res.render('cart.ejs', GetBaseInitial(req));
 });
 
 app.get('/checkout', function(req, res) {
-    let cartItems = JSON.parse(GetItemFromStore(req, "cart"));
-    let initial = GetUserInitial(req);
-    initial["cartItems"] = cartItems;
+    let initial = GetBaseInitial(req);
     res.render('checkout.ejs', initial);
 });
 

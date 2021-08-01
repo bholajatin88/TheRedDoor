@@ -136,7 +136,7 @@ module.exports={
                         .then(function(newUser) {
                             RemoveItemFromStore(req, "userDetails");
                             SetItemInStore(req, "userDetails", JSON.stringify(user));
-                            res.render('home.ejs', {userInitial: GetInitial(user)});
+                            res.render('home.ejs', GetBaseInitial(req));
                         })
                         .catch(function(err) {
                             if (err.name == 'ValidationError') {
