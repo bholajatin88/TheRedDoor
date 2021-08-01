@@ -50,10 +50,7 @@ app.get('/register', function(req, res) {
 app.get('/editprofile', userController.getProfile);
 
 app.get('/menu', function(req, res) {
-    let details = GetUserInitial(req);
-    console.log(details);
-    menu_items = menuController.GetAllMenuItems(req,res,details);      
-    res.render('foodMenu.ejs', details);
+    menuController.GetAllMenuItems(req,res);
 });
 
 app.get('/contact', function(req, res) {

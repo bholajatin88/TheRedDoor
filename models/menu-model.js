@@ -7,7 +7,8 @@ var menuSchema = new mongoose.Schema(
         item_price:{type:Number},
         is_chef_special:{type:Boolean},
         spice_level:{type:Number},
-        cuisine_type:{type:String}
+        cuisine_type:{type:String},
+        is_veg:{type:Boolean}
     }
 );
 
