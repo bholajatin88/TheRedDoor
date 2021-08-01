@@ -149,6 +149,11 @@
 	left: 160px;
 }
 
+.navLink a:hover{
+	color: white;
+	text-decoration: none;
+}
+
 .navLink a{
 	font-family: 'Raleway-Light';
     color: white;
@@ -237,7 +242,7 @@
     padding-top: 3%;
     padding-bottom: 3%;
     padding-right: 5%;
-    width: 50%;
+    width: 60%;
 }
 
 .menu-items-right{
@@ -248,7 +253,7 @@
     padding-top: 3%;
     padding-bottom: 3%;
     padding-right: 2%;
-    width: 50%;
+   
 }
 
 .displayTableCell{
@@ -298,8 +303,8 @@
 }
 
 .foodImgDiv{
-	padding-top: 6%;
-	padding-right: 4%;
+	margin-top: 6%;
+    margin-right: 6%;
 }
 
 .foodImg{
@@ -320,6 +325,10 @@
 
 .paddingLeft4 {
 	padding-left: 4%
+}
+
+.marginLeft4{
+	margin-left: 4%;
 }
 
 .circle350
@@ -444,3 +453,20 @@
 	text-decoration-line: none;
 }
 
+.itemNameLink{
+	cursor: pointer;
+    color: indianred;
+    text-decoration: underline;
+}
+
+a.itemNameLink:hover {
+    color: #954242;
+}
+
+.input-group{
+	width:27% !important;
+}
+
+.mt10{
+	margin-top: 10%;
+}
