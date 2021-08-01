@@ -13,9 +13,14 @@ module.exports={
         Menu.find({},function(err, result){
             if(err) { throw err;}
             else{
-                var urerInitial = GetUserInitial();
-                urerInitial.menu_items = result;
-                res.render("foodMenu.ejs",urerInitial);
+                let italian_dishes = result.filter(cuisine=>cuisine.cuisine_type=="Italian");
+                let chinese_dishes = result.filter(cuisine=>cuisine.cuisine_type=="Chinese");
+                let dessert_dishes = result.filter(cuisine=>cuisine.cuisine_type=="Desserts");
+                var userInitial = GetUserInitial(req);
+                userInitial.italian_dishes = italian_dishes;
+                userInitial.chinese_dishes = chinese_dishes;
+                userInitial.dessert_dishes = dessert_dishes;
+                res.render("foodMenu.ejs",userInitial);
             }
             
         });

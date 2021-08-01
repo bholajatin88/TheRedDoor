@@ -3,6 +3,13 @@
 	<title>Food Menu</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 	<link rel="stylesheet" href="css/foodMenu.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="js/bootstrap-input-spinner.js"></script>
+	<script src="js/foodMenu.js"></script>
+	
+	
 </head>
 <body class="bodyBackground">
 	<div class="navBg">
@@ -37,126 +44,127 @@
 			<div class="menuHeader">Menu
 				<hr class="menu-hr">
 				<div class="menu-background">
-					<% for (var i=0; i<menu_items.length; i++){ %>
-						
-							<p><%= menu_items[i].item_name %> &nbsp;</p>
-						
-						<%}%>
-					
 					<div class="menu-content">
 					<div class="circle70"></div>
 						<div class="menu-head">Italian</div>
 						<div class="circle350"></div>
 						<div class="foodImgDiv displayTableCell floatRight"><img src="images/Lasagna.jpg" class="foodImg"></div>
 						<div class="menu-items">
-							<div class="menu-item-content">
-							<!--div class="displayTableCell foodImgDiv floatLeft"><img src="images/Lasagna.jpg" class="foodImg paddingRight5"></div>
-								<div class="food-item-desc"-->
-								<div class="displayTableCell">Penne Arrabiata <img class="chiliImg"><img class="chiliImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">19.00</div>
-								<div class="menu-item-desc">Thin slices of prosciutto, garlic, capers and black olives in spicy plum tomato sauce.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Lasagna <img class="chefImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">16.50</div>
-								<div class="menu-item-desc">Fresh pasta sheets layered with ricotta, romano and mozzarella cheese, ham and a meat sauce baked in the oven.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Arancini</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">11.95</div>
-								<div class="menu-item-desc">Italian Rice Balls stuffed with Mozzarella; served with fresh marinara sauce.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Spaghetti with Meat Sauce</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">12.00</div>
-								<div class="menu-item-desc">add meat balls $2.00</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Bruschetta Bread <img class="vegImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">8.50</div>
-								<div class="menu-item-desc">Sweet tomatoes and basil</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Rugantino Sandwich</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">10.00</div>
-								<div class="menu-item-desc">Prosciutto, Cappicollo, Calabrese Hot Salami (add side order of spaghetti $4.50 extra)	</div>
-							</div>		
+							<% for (var i=0; i<italian_dishes.length; i++){ %>
+						
+								<div class="menu-item-content">
+									<input type="hidden" name="selectedItem" id="selectedItem" value="<%= JSON.stringify(italian_dishes[i]) %>"/>
+									<div class="displayTableCell"><a data-toggle="modal" data-target="#myModal" class="itemNameLink"><%= italian_dishes[i].item_name %></a>
+										<% if (italian_dishes[i].is_chef_special) { %> 
+											<img class="chefImg">
+										<%}%>
+										<% if (italian_dishes[i].is_veg) { %> 
+											<img class="vegImg">
+										<%}%>
+										<% for (var j=0; j<italian_dishes[i].spice_level; j++){ %>	
+											<img class="chiliImg">
+										<%}%>
+									</div>
+										<div class="menu-classic-dot"></div>
+										<div class="displayTableCell">$<%= italian_dishes[i].item_price %></div>
+										<div class="menu-item-desc"><%= italian_dishes[i].item_description %></div>
+								</div>
+							
+							<%}%>
+							
 						</div>
 						<div class="menu-head">Chinese</div>
 						<div class="circleleft"></div>
-						<div class="displayTableCell foodImgDiv floatLeft paddingLeft4"><img src="images/LobsterNoodles.jpg" class="foodImg"></div>
+						<div class="displayTableCell foodImgDiv floatLeft marginLeft4"><img src="images/LobsterNoodles.jpg" class="foodImg"></div>
 						<div class="menu-items-right">
-							<div class="menu-item-content">
-								<div class="displayTableCell">Spring Roll <img class="vegImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">7.00</div>
-								<div class="menu-item-desc">Cabbage, carrots &amp; mixed vegetables.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Singapore Noodles <img class="chiliImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">13.00</div>
-								<div class="menu-item-desc">Thin rice noodles, yellow curry, BBQ pork, shrimp.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Hong Shing Chili Chicken <img class="vegImg"> <img class="chiliImg"><img class="chiliImg"><img class="chiliImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">15.00</div>
-								<div class="menu-item-desc">Dry style, hoisin &amp; chili sauce, crispy vermicelli noodles</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Fried Rice</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">10.00</div>
-								<div class="menu-item-desc">Egg, green peas, soya sauce &amp; scallions</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Lobster E-FU Noodles <img class="chefImg"> <img class="chiliImg"><img class="chiliImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">38.00</div>
-								<div class="menu-item-desc">Lobster, ginger, scallions, wheat noodles</div>
-							</div>
+							<% for (var i=0; i<chinese_dishes.length; i++){ %>
+						
+								<div class="menu-item-content">
+									<input type="hidden" name="selectedItem" id="selectedItem" value="<%= JSON.stringify(chinese_dishes[i]) %>"/>
+									<div class="displayTableCell"><a data-toggle="modal" data-target="#myModal" class="itemNameLink"><%= chinese_dishes[i].item_name %></a>
+										<% if (chinese_dishes[i].is_chef_special) { %> 
+											<img class="chefImg">
+										<%}%>
+										<% if (chinese_dishes[i].is_veg) { %> 
+											<img class="vegImg">
+										<%}%>
+										<% for (var j=0; j<chinese_dishes[i].spice_level; j++){ %>	
+											<img class="chiliImg">
+										<%}%>
+									</div>
+										<div class="menu-classic-dot"></div>
+										<div class="displayTableCell">$<%= chinese_dishes[i].item_price %></div>
+										<div class="menu-item-desc"><%= chinese_dishes[i].item_description %></div>
+								</div>
+							
+							<%}%>
+							
 						</div>
 						<div class="menu-head">Desserts</div>
 						<div class="circleRight"></div>
 						<div class="foodImgDiv displayTableCell floatRight"><img src="images/Tiramisu.jpg" class="foodImg"></div>
 						<div class="menu-items">
-							<div class="menu-item-content">
-								<div class="displayTableCell">Tiramisu <img class="chefImg"></div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">15.00</div>
-								<div class="menu-item-desc">Sponge cake, cream cheese, whipped cream, espresso, amaretto, cocoa.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Mango Sorbet</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">8.00</div>
-								<div class="menu-item-desc">Preserved peach chutney, vanilla crumble.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Dark Chocolate Fondant</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">12.00</div>
-								<div class="menu-item-desc">Dark chocolate, preserved cherries, elderflower cream.</div>
-							</div>
-							<div class="menu-item-content">
-								<div class="displayTableCell">Almond Float</div>
-								<div class="menu-classic-dot"></div>
-								<div class="displayTableCell">8.00</div>
-								<div class="menu-item-desc">Gelatin mixed with sugar, almond extract &amp; evaporated milk.</div>
-							</div>
+							<% for (var i=0; i<dessert_dishes.length; i++){ %>
+						
+								<div class="menu-item-content">
+									<input type="hidden" name="selectedItem" id="selectedItem" value="<%= JSON.stringify(dessert_dishes[i]) %>"/>
+									<div class="displayTableCell"><a data-toggle="modal" data-target="#myModal" class="itemNameLink"><%= dessert_dishes[i].item_name %></a>
+										<% if (dessert_dishes[i].is_chef_special) { %> 
+											<img class="chefImg">
+										<%}%>
+										<% if (dessert_dishes[i].is_veg) { %> 
+											<img class="vegImg">
+										<%}%>
+										<% for (var j=0; j<dessert_dishes[i].spice_level; j++){ %>	
+											<img class="chiliImg">
+										<%}%>
+									</div>
+										<div class="menu-classic-dot"></div>
+										<div class="displayTableCell">$<%= dessert_dishes[i].item_price %></div>
+										<div class="menu-item-desc"><%= dessert_dishes[i].item_description %></div>
+								</div>
+							
+							<%}%>
+							
 						</div>
+						  
 						<div class="foodLabels"><img class="chefImg">&nbsp; Chef's Special &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;<img class="vegImg">&nbsp; Vegetarian &nbsp; &nbsp; &nbsp;| &nbsp; &nbsp; &nbsp;<img class="chiliImg">&nbsp; Spicy</div>
 					</div>
 				</div>
 			</div>
 		</main>
 	</div>
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+		  
+			<!-- Modal Header -->
+			<div class="modal-header">
+			  <h4 class="modal-title"></h4>
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			
+			<!-- Modal body -->
+			<div class="modal-body">
+			  <div class="modal-desc"></div>
+			  <div class="mt10">
+				  <label for="qty">Select Quantity</label>
+				  <input type="number" name=qty value="1" min="1" max="4" step="1"></input>
+				</div>
+			</div>
+			
+			<!-- Modal footer -->
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			  <button type="button" id="add-cart-btn" class="btn btn-danger" data-dismiss="modal">Add to Cart</button>
+			</div>
+			
+		  </div>
+		</div>
+	  </div>
+	  <script>
+		$("input[type='number']").inputSpinner();
+	</script>
 </body>
 </html>
