@@ -13,9 +13,11 @@ app.use(bodyParser.json());
 require('./models/address-model');
 require('./models/user-model');
 require('./models/menu-model');
+require('./models/order-model');
 var userController = require('./controllers/user-controller');
 var addressController = require('./controllers/address-controller');
 var menuController = require('./controllers/menu-controller');
+var orderController = require('./controllers/order-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
 var GetUserInitial = require('./common/util').GetUserInitial;
 var GetItemFromStore = require('./common/store').GetItemFromStore;
@@ -77,6 +79,10 @@ app.get('/editprofile', function(req, res) {
 
 app.get('/menu', function(req, res) {
     menuController.GetAllMenuItems(req,res);
+});
+
+app.get('/orders', function(req, res) {
+    orderController.GetAllOrders(req,res);
 });
 
 app.get('/contact', function(req, res) {

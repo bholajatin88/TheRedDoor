@@ -13,9 +13,9 @@
 </head>
 <body class="bodyBackground">
 	<div class="navBg">
-		<nav class="navBar">
+		<nav class="navBar foodMenuNavBar">
 			<img class="logoImg">
-			<span class="navLink">
+			<span class="navLink foodMenuNavLink">
 				<a href="/home">Home</a>
 				<a class="menu-item-selected" href="/menu">Menu</a>
 				<a href="/about">About Us</a>
@@ -25,9 +25,9 @@
 				<% } %>
 			</span>
 			<% if(userInitial) { %>
-				<div class="bar"><%=userInitial%></div>
+				<div class="bar menu-user-initial"><%=userInitial%></div>
 			<% } %>
-			<ul class="menubar-list">
+			<ul class="menubar-list food-menu-bar-list">
 				
 				<li class="mobile"><a href="/home">Home</a></li>
 				<li class="menu-item-selected mobile"><a href="/menu">Menu</a></li>
@@ -36,6 +36,7 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
+					<li><a href="/editprofile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
 			</ul>
