@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'), User = mongoose.model('user'), Address = mongoose.model('addresses');
 var { GetItemFromStore, RemoveItemFromStore, SetItemInStore } = require('../common/store');
 var addressController = require('./address-controller');
-var { GetInitial, GetUserInitial } = require('../common/util');
+var { GetInitial, GetBaseInitial } = require('../common/util');
 
 module.exports={
     Login: function(req, res) {
@@ -175,7 +175,7 @@ module.exports={
                 console.log('Error while updating address');
                 throw exception;
             }
-            let registerInitial = GetUserInitial(req);
+            let registerInitial = GetBaseInitial(req);
             registerInitial["error"] = false;
             registerInitial["edit"] = true;
             registerInitial["form"] = userDetails? userDetails : false;

@@ -39,7 +39,7 @@
 	<main>
 		<div id="site">
             <h1 class="bold">Checkout</h1>
-            <% if(!userInitial) { %>
+            <% if(!cartItems || cartItems.length == 0) { %>
                 <div class="no-items">Add Items in cart to checkout!!</div>
                 <div class="backBtn">	
                     <a href="/menu" class="back">Order Now</a>
@@ -53,14 +53,19 @@
                         <th scope="col">Price</th>
                     </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                        <% for(let i=0;i<cartItems.length;i++) { %>
+                            <tr>
+                                <td><%= cartItems[i].item_name %></td>
+                                <td><%= cartItems[i].qty %></td>
+                                <td><%= cartItems[i].total_price %></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
                 </table>
                 <div id="pricing">
-                    <p id="shipping">
-                    <strong>Shipping</strong>: <span id="sshipping"></span>
-                    </p>
                     <p id="sub-total">
-                    <strong>Total</strong>: <span id="stotal"></span>
+                    <strong>Order Total</strong>: <span id="stotal"></span>
                     </p>
                 </div>
 

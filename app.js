@@ -1,7 +1,7 @@
 const express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var {Store, RemoveItemFromStore} = require('./common/store');
+var {Store, RemoveItemFromStore, SetItemInStore} = require('./common/store');
 const port = 80;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -17,8 +17,8 @@ var userController = require('./controllers/user-controller');
 var addressController = require('./controllers/address-controller');
 var menuController = require('./controllers/menu-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var GetUserInitial = require('./common/util').GetUserInitial;
-var GetItemFromStore = require('./common/store').GetItemFromStore;
+var { GetUserInitial, GetBaseInitial } = require('./common/util');
+var { SetItemInStore, GetItemFromStore } = require('./common/store');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //common file to create db connection
@@ -26,21 +26,21 @@ DbConnect();
 Store(app);
 
 app.get('/home', function(req, res) {
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.get('/', function(req, res) {
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.get('/login', function(req, res) {
-    let loginInitial = GetUserInitial(req);
-    loginInitial["error"] = false;
-    res.render('login.ejs', loginInitial);
+    let initial = GetBaseInitial(req);
+    initial["error"] = false;
+    res.render('login.ejs', initial);
 });
 
 app.get('/register', function(req, res) {
-    let registerInitial = GetUserInitial(req);
+    let registerInitial = GetBaseInitial(req);
     registerInitial["error"] = false;
     registerInitial["form"] = false;
     registerInitial["edit"] = false;
@@ -49,21 +49,19 @@ app.get('/register', function(req, res) {
 
 app.get('/editprofile', userController.getProfile);
 
-app.get('/menu', function(req, res) {
-    menuController.GetAllMenuItems(req,res);
-});
+app.get('/menu', menuController.GetAllMenuItems);
 
 app.get('/contact', function(req, res) {
-    res.render('contact.ejs', GetUserInitial(req));
+    res.render('contact.ejs', GetBaseInitial(req));
 });
 
 app.get('/about', function(req, res) {
-    res.render('about.ejs', GetUserInitial(req));
+    res.render('about.ejs', GetBaseInitial(req));
 });
 
 app.get('/logout', function(req, res) {
     RemoveItemFromStore(req,"userDetails");
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.post('/login', userController.Login);
@@ -75,8 +73,22 @@ app.post('/register', function(req, res) {
     }
 });
 
+app.post('/addItemToCart',function(req, res) {
+    let selectedItem = req.body;
+    let currentItems = JSON.parse(GetItemFromStore(req, "cart"));
+    let cartItems = [];
+    if(currentItems) {
+        cartItems = [...currentItems];
+    }
+    cartItems.push(selectedItem);
+    SetItemInStore(req, "cart", JSON.stringify(cartItems));
+});
+
 app.get('/checkout', function(req, res) {
-    res.render('checkout.ejs', GetUserInitial(req));
+    let cartItems = JSON.parse(GetItemFromStore(req, "cart"));
+    let initial = GetUserInitial(req);
+    initial["cartItems"] = cartItems;
+    res.render('checkout.ejs', initial);
 });
 
 // middleware to catch exceptions

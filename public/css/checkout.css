@@ -40,6 +40,10 @@
     border: 1px solid black;
 }
 
+#checkout-cart thead{
+    text-align: left;
+}
+
 .no-items {
     vertical-align: middle;
     margin-top: 50px !important;
