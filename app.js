@@ -15,6 +15,8 @@ require('./models/user-model');
 var userController = require('./controllers/user-controller');
 require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
+require('./models/order-model');
+var orderController = require('./controllers/order-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
 var { GetBaseInitial, UpdateCart } = require('./common/util');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
@@ -48,6 +50,10 @@ app.get('/register', function(req, res) {
 app.get('/editprofile', userController.getProfile);
 
 app.get('/menu', menuController.GetAllMenuItems);
+
+app.get('/orders', function(req, res) {
+    orderController.GetAllOrders(req,res);
+});
 
 app.get('/contact', function(req, res) {
     res.render('contact.ejs', GetBaseInitial(req));
