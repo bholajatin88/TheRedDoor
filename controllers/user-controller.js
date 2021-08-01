@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'), User = mongoose.model('user'), Address = mongoose.model('addresses');
 var { GetItemFromStore, RemoveItemFromStore, SetItemInStore } = require('../common/store');
 var addressController = require('./address-controller');
-var { GetInitial, GetBaseInitial } = require('../common/util');
+var { GetBaseInitial } = require('../common/util');
 
 module.exports={
     Login: function(req, res) {
@@ -23,7 +23,7 @@ module.exports={
             } else {
                 if(results && results.length > 0) {
                     SetItemInStore(req, "userDetails", JSON.stringify(results[0]));
-                    res.render('home.ejs', {userInitial: GetInitial(results[0])});
+                    res.render('home.ejs', GetBaseInitial(req));
                 } else {
                     res.render('login.ejs', {error: "Invalid login username or password"});
                 }
@@ -70,7 +70,7 @@ module.exports={
                         User.create(user)
                         .then(function(newUser) {
                             SetItemInStore(req, "userDetails", JSON.stringify(newUser));
-                            res.render('home.ejs', {userInitial: GetInitial(newUser)});
+                            res.render('home.ejs', GetBaseInitial(req));
                         })
                         .catch(function(err) {
                             Address.deleteOne({_id: { $eq: address_id }})

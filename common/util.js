@@ -23,6 +23,9 @@ module.exports.GetUserInitial = (req) => {
 
 module.exports.GetBaseInitial = (req) => {
     let cartItems = JSON.parse(GetItemFromStore(req, "cart"));
+    if(!cartItems) {
+        cartItems = [];
+    }
     let initial = this.GetUserInitial(req);
     initial["cartItems"] = cartItems;
     initial["cartCount"] = this.GetCartCount(cartItems);

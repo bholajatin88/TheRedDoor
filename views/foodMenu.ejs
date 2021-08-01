@@ -22,19 +22,27 @@
 					<a href="/login">Login/Register</a>
 				<% } %>
 			</span>
-			<div class="cart">
-				<% if(!userInitial && cartItems && cartItems.length > 0) { %>
-					<a href="/checkout">
-						<img class="cart-img" src="images/cart.png">
-						<div class="cart-count"><%=cartCount%></div>
-					</a>
-				<% } %>
-			</div>
-			<% if(userInitial) { %>
-				<div class="bar menu-user-initial"><%=userInitial%></div>
+			<% if(!userInitial) { %>
+				<div class="cart">
+					<% if(cartItems && cartItems.length > 0) { %>
+						<a href="/checkout">
+							<img class="cart-img" src="images/cart.png">
+							<div class="cart-count-menu"><%=cartCount%></div>
+						</a>
+					<% } %>
+				</div>
 			<% } %>
-			<ul class="menubar-list food-menu-bar-list">
-				
+			<% if(userInitial) { %>
+				<div class="box">
+					<div class="menu-user-initial">
+						<%=userInitial%>
+						<% if(cartItems && cartItems.length > 0) { %>
+							<div class="bar-cart-count-menu"><%=cartCount%></div>
+						<% } %>
+					</div>
+				</div>
+			<% } %>
+			<ul class="menu-list">
 				<li class="mobile"><a href="/home">Home</a></li>
 				<li class="menu-item-selected mobile"><a href="/menu">Menu</a></li>
 				<li class="mobile"><a href="/about">About Us</a></li>
@@ -42,6 +50,7 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
+					<li><a href="/checkout">View Cart</a></li>
 					<li><a href="/editprofile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
