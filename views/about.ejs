@@ -20,6 +20,14 @@
 					<a href="/login">Login/Register</a>
 				<% } %>
 			</span>
+			<div class="cart">
+				<% if(!userInitial && cartItems && cartItems.length > 0) { %>
+						<a href="/checkout">
+							<img class="cart-img" onclick="" src="images/cart.png">
+							<div class="cart-count"><%=cartCount%></div>
+						</a>
+				<% } %>
+			</div>
 			<% if(userInitial) { %>
 				<div class="bar"><%=userInitial%></div>
 			<% } %>

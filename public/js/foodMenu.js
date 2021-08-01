@@ -16,7 +16,13 @@ $(document).ready(function(){
             var qty = parseInt($("input[type=number]").val());
             selectedItem["qty"] = qty;
             selectedItem["total_price"] = qty* selectedItem.item_price;
-            listOfSelectedItems.push(selectedItem);
-            localStorage.setItem("cart", JSON.stringify(listOfSelectedItems));
+            $.ajax({
+                url: "/addItemToCart",
+                type: "POST",
+                data: selectedItem,
+                success: function(result){
+                        $('.cart').html(result);
+                }
+        });
     });
 });

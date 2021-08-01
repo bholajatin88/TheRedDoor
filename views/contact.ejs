@@ -5,7 +5,6 @@
 		<title>Contact Us</title>
 		<link href="css/contact.css" rel="stylesheet" type="text/css">
 		<link href="css/foodMenu.css" rel="stylesheet" type="text/css">
-		<link href="css/contact2.css" rel="stylesheet" type="text/css">
 		<style></style>
 	</head>
 <body class="bodyBackground">
@@ -21,6 +20,14 @@
 					<a href="/login">Login/Register</a>
 				<% } %>
 			</span>
+			<div class="cart">
+				<% if(!userInitial && cartItems && cartItems.length > 0) { %>
+					<a href="/checkout">
+						<img class="cart-img" onclick="" src="images/cart.png">
+						<div class="cart-count"><%=cartCount%></div>
+					</a>
+				<% } %>
+			</div>
 			<% if(userInitial) { %>
 				<div class="bar"><%=userInitial%></div>
 			<% } %>

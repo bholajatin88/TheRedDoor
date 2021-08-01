@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'), User = mongoose.model('user'), Address = mongoose.model('addresses');
 var { GetItemFromStore, RemoveItemFromStore, SetItemInStore } = require('../common/store');
-var GetInitial = require('../common/util').GetInitial;
+var addressController = require('./address-controller');
+var { GetInitial, GetBaseInitial } = require('../common/util');
 
 module.exports={
     Login: function(req, res) {
@@ -135,7 +136,7 @@ module.exports={
                         .then(function(newUser) {
                             RemoveItemFromStore(req, "userDetails");
                             SetItemInStore(req, "userDetails", JSON.stringify(user));
-                            res.render('home.ejs', {userInitial: GetInitial(user)});
+                            res.render('home.ejs', GetBaseInitial(req));
                         })
                         .catch(function(err) {
                             if (err.name == 'ValidationError') {
@@ -155,5 +156,32 @@ module.exports={
                 }
             }
         }).collation( { locale: 'en', strength: 1 })
+    },
+    getProfile: function(req, res) {
+        let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
+        addressController.GetAddress(userDetails.address_id).then(function(userAddress) {
+            if(userAddress) {
+                let address = {
+                    street: userAddress[0].street,
+                    address_line_2: userAddress[0].address_line_2,
+                    postalCode: userAddress[0].zip,
+                    city: userAddress[0].city,
+                    state: userAddress[0].state
+                }
+                for (const [key, value] of Object.entries(address)) {
+                    userDetails[key] = value;
+                }
+            } else {
+                console.log('Error while updating address');
+                throw exception;
+            }
+            let registerInitial = GetBaseInitial(req);
+            registerInitial["error"] = false;
+            registerInitial["edit"] = true;
+            registerInitial["form"] = userDetails? userDetails : false;
+            res.render('register.ejs', registerInitial);
+        }).catch(function(err) {
+            throw err;
+        });
     }
 }

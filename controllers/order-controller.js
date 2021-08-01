@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'), Order = mongoose.model('orders');
 var menuController = require('../controllers/menu-controller');
-var SetItemInStore = require('../common/store').SetItemInStore;
 var GetUserInitial = require('../common/util').GetUserInitial;
 
 module.exports={

@@ -12,15 +12,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 require('./models/address-model');
 require('./models/user-model');
-require('./models/menu-model');
-require('./models/order-model');
 var userController = require('./controllers/user-controller');
-var addressController = require('./controllers/address-controller');
+require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
+require('./models/order-model');
 var orderController = require('./controllers/order-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var GetUserInitial = require('./common/util').GetUserInitial;
-var GetItemFromStore = require('./common/store').GetItemFromStore;
+var { GetBaseInitial, UpdateCart } = require('./common/util');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //common file to create db connection
@@ -28,74 +26,46 @@ DbConnect();
 Store(app);
 
 app.get('/home', function(req, res) {
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.get('/', function(req, res) {
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.get('/login', function(req, res) {
-    let loginInitial = GetUserInitial(req);
-    loginInitial["error"] = false;
-    res.render('login.ejs', loginInitial);
+    let initial = GetBaseInitial(req);
+    initial["error"] = false;
+    res.render('login.ejs', initial);
 });
 
 app.get('/register', function(req, res) {
-    let registerInitial = GetUserInitial(req);
+    let registerInitial = GetBaseInitial(req);
     registerInitial["error"] = false;
     registerInitial["form"] = false;
     registerInitial["edit"] = false;
     res.render('register.ejs', registerInitial);
 });
 
-app.get('/editprofile', function(req, res) {
-    let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
-    addressController.GetAddress(userDetails.address_id).then(function(userAddress) {
-        if(userAddress) {
-            let address = {
-                street: userAddress[0].street,
-                address_line_2: userAddress[0].address_line_2,
-                postalCode: userAddress[0].zip,
-                city: userAddress[0].city,
-                state: userAddress[0].state
-            }
-            for (const [key, value] of Object.entries(address)) {
-                userDetails[key] = value;
-            }
-        } else {
-            console.log('Error while updating address');
-            throw exception;
-        }
-        let registerInitial = GetUserInitial(req);
-        registerInitial["error"] = false;
-        registerInitial["edit"] = true;
-        registerInitial["form"] = userDetails? userDetails : false;
-        res.render('register.ejs', registerInitial);
-    }).catch(function(err) {
-        throw err;
-    });
-});
+app.get('/editprofile', userController.getProfile);
 
-app.get('/menu', function(req, res) {
-    menuController.GetAllMenuItems(req,res);
-});
+app.get('/menu', menuController.GetAllMenuItems);
 
 app.get('/orders', function(req, res) {
     orderController.GetAllOrders(req,res);
 });
 
 app.get('/contact', function(req, res) {
-    res.render('contact.ejs', GetUserInitial(req));
+    res.render('contact.ejs', GetBaseInitial(req));
 });
 
 app.get('/about', function(req, res) {
-    res.render('about.ejs', GetUserInitial(req));
+    res.render('about.ejs', GetBaseInitial(req));
 });
 
 app.get('/logout', function(req, res) {
     RemoveItemFromStore(req,"userDetails");
-    res.render('home.ejs', GetUserInitial(req));
+    res.render('home.ejs', GetBaseInitial(req));
 });
 
 app.post('/login', userController.Login);
@@ -105,6 +75,16 @@ app.post('/register', function(req, res) {
     } else {
         userController.Register(req, res);
     }
+});
+
+app.post('/addItemToCart',function(req, res) {
+    UpdateCart(req);
+    res.render('cart.ejs', GetBaseInitial(req));
+});
+
+app.get('/checkout', function(req, res) {
+    let initial = GetBaseInitial(req);
+    res.render('checkout.ejs', initial);
 });
 
 // middleware to catch exceptions

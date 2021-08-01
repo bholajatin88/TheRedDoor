@@ -41,7 +41,7 @@
 	}
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 1070px) {
 	[class="navLink"] {
 		display: none !important;
 	}
@@ -144,7 +144,7 @@
 }
 
 .navLink {
-	width: 80%;
+	width: 90%;
 	position: absolute;
 	left: 160px;
 }
@@ -396,6 +396,46 @@
 	background-color: grey;
 }
 
+.cart {
+	cursor: pointer;
+	width: 40px;
+    height: 40px;
+	position: absolute;
+    right: 5%;
+	padding: 5px;
+	border-radius: 50px;
+	z-index: 2;
+	top: 6px;
+}
+
+.cart a {
+	padding: 0px;
+}
+
+.cart-img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+}
+
+.cart-count {
+	cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    padding: 2px;
+    border-radius: 50px;
+    border: 1px solid blue;
+    text-align: center;
+    color: pink;
+    background: blue;
+    font-weight: bold;
+    font-size: 10px;
+    z-index: 2;
+    top: 5px;
+    right: -20%;
+}
+
 .bar {
 	cursor: pointer;
 	width: 40px;
@@ -455,8 +495,8 @@
 
 .itemNameLink{
 	cursor: pointer;
-    color: indianred;
-    text-decoration: underline;
+    color: indianred !important;
+    text-decoration: underline !important;
 }
 
 a.itemNameLink:hover {
