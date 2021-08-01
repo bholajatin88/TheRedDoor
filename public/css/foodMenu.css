@@ -470,3 +470,25 @@ a.itemNameLink:hover {
 .mt10{
 	margin-top: 10%;
 }
+
+.foodMenuNavBar{
+	padding: 0 !important;
+	margin-left: 0.5rem;
+}
+
+.foodMenuNavLink a{
+	padding: 16px 40px 15px 40px;
+}
+
+.menu-user-initial{
+	width: 52px;
+    height: 52px;
+    font-family: "Times New Roman";
+	padding:0;
+}
+
+.food-menu-bar-list li{
+    width: 100%;
+    padding-top: 5px;
+    height: 44px;
+}
