@@ -47,33 +47,7 @@ app.get('/register', function(req, res) {
     res.render('register.ejs', registerInitial);
 });
 
-app.get('/editprofile', function(req, res) {
-    let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
-    addressController.GetAddress(userDetails.address_id).then(function(userAddress) {
-        if(userAddress) {
-            let address = {
-                street: userAddress[0].street,
-                address_line_2: userAddress[0].address_line_2,
-                postalCode: userAddress[0].zip,
-                city: userAddress[0].city,
-                state: userAddress[0].state
-            }
-            for (const [key, value] of Object.entries(address)) {
-                userDetails[key] = value;
-            }
-        } else {
-            console.log('Error while updating address');
-            throw exception;
-        }
-        let registerInitial = GetUserInitial(req);
-        registerInitial["error"] = false;
-        registerInitial["edit"] = true;
-        registerInitial["form"] = userDetails? userDetails : false;
-        res.render('register.ejs', registerInitial);
-    }).catch(function(err) {
-        throw err;
-    });
-});
+app.get('/editprofile', userController.getProfile);
 
 app.get('/menu', function(req, res) {
     let details = GetUserInitial(req);
@@ -102,6 +76,10 @@ app.post('/register', function(req, res) {
     } else {
         userController.Register(req, res);
     }
+});
+
+app.get('/checkout', function(req, res) {
+    res.render('checkout.ejs', GetUserInitial(req));
 });
 
 // middleware to catch exceptions

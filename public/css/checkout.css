@@ -1,0 +1,50 @@
+#site {
+    background-color: lightgray;
+    width: 80%;
+    margin: auto;
+    margin-top: 200px;
+    min-height: 300px;
+}
+
+#site > * {
+    width: 90%;
+    margin:auto;
+}
+
+.bold {
+    font-size: 45px;
+}
+
+.backBtn {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 100px;
+    color: white;
+}
+
+.back {
+    text-decoration: none;
+    width: 115px;
+    height: 25px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+#checkout-cart {
+    margin-top: 25px;
+    border: 1px solid black;
+}
+
+.no-items {
+    vertical-align: middle;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    font-size: 20px;
+    margin: auto;
+    width: 22% !important;
+}
