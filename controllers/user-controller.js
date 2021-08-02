@@ -113,7 +113,7 @@ module.exports={
                 throw err;
             } else {
                 if(results && results.length > 0) {
-                    res.render('register.ejs', {error: {invalidUsername: "Login Username or Email already exists."}, edit: true, form: body}); 
+                    res.render('editProfile.ejs', {error: {invalidUsername: "Login Username or Email already exists."}, edit: true, form: body}); 
                 } else {
                     let address = {
                         street: body.street.trim(),
@@ -140,7 +140,7 @@ module.exports={
                         })
                         .catch(function(err) {
                             if (err.name == 'ValidationError') {
-                                res.render('register.ejs', {error: err, edit: true, form: body});
+                                res.render('editProfile.ejs', {error: err, edit: true, form: body});
                             } else {
                                 throw err;
                             }
@@ -148,7 +148,7 @@ module.exports={
                     })
                     .catch(function(err) {
                         if (err.name == 'ValidationError') {
-                            res.render('register.ejs', {error: err.errors, edit: true, form: body});
+                            res.render('editProfile.ejs', {error: err.errors, edit: true, form: body});
                         } else {
                             throw err;
                         }
@@ -178,7 +178,7 @@ module.exports={
             let registerInitial = GetBaseInitial(req);
             registerInitial["error"] = false;
             registerInitial["form"] = userDetails? userDetails : false;
-            res.render('editprofile.ejs', registerInitial);
+            res.render('editProfile.ejs', registerInitial);
         }).catch(function(err) {
             throw err;
         });

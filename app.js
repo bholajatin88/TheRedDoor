@@ -8,7 +8,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
-//app.use(methodOverride('_method'));
+app.use(methodOverride('_method'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -19,8 +19,8 @@ require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
 require('./models/order-model');
 var orderController = require('./controllers/order-controller');
-require('./models/contact-message-model');
-var contactController = require('./controllers/contact-message-controller');
+require('./models/message-model');
+var contactController = require('./controllers/message-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
 var { GetBaseInitial, UpdateCart, GetCartTotal, GetAddressId } = require('./common/util');
 const addressController = require('./controllers/address-controller');
@@ -51,9 +51,9 @@ app.get('/register', function(req, res) {
     res.render('register.ejs', registerInitial);
 });
 
-app.get('/editprofile', userController.getProfile);
+app.get('/editProfile', userController.getProfile);
 
-app.put('/editprofile', userController.UpdateUser);
+app.put('/editProfile', userController.UpdateUser);
 
 app.get('/menu', menuController.GetAllMenuItems);
 
@@ -83,7 +83,7 @@ app.post('/register', function(req, res) {
     userController.Register(req, res);
 });
 
-app.post('/contact', contactController.CreateContactMessage)
+app.post('/contact', contactController.CreateMessage)
 
 app.post('/addItemToCart',function(req, res) {
     UpdateCart(req);

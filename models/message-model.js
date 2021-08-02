@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var contactMessageSchema = new mongoose.Schema(
+var MessageSchema = new mongoose.Schema(
     {
         customer_name:{type:String, required: [true, 'Name is required']},
         email: {
@@ -17,4 +17,4 @@ var contactMessageSchema = new mongoose.Schema(
     }
 );
 
-mongoose.model('contactMessages', contactMessageSchema);
+mongoose.model('messages', MessageSchema);

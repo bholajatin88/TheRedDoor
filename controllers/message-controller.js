@@ -1,15 +1,15 @@
-var mongoose = require('mongoose'), ContactMessage = mongoose.model('contactMessages');
+var mongoose = require('mongoose'), Message = mongoose.model('messages');
 var GetBaseInitial = require('../common/util').GetBaseInitial;
 
 module.exports={
-    CreateContactMessage: function(req, res) {
+    CreateMessage: function(req, res) {
         var body = req.body;
         let msg = {
             customer_name: body.name.trim(),
             email: body.email.trim(),
             message: body.message.trim()
         };
-        ContactMessage.create(msg)
+        Message.create(msg)
         .then(function(newMessage) {
             let initial = GetBaseInitial(req);
             initial["error"] = false;
