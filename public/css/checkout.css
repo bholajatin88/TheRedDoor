@@ -4,6 +4,9 @@
     margin: auto;
     margin-top: 200px;
     min-height: 300px;
+    padding: 2%;
+    border-radius: 10px;
+    opacity: 97%;
 }
 
 #site > * {
@@ -38,6 +41,11 @@
 #checkout-cart {
     margin-top: 25px;
     border: 1px solid black;
+    padding: 1%;
+    line-height: 1.5;
+    font-size: 17px;
+    border-radius: 10px;
+    background: whitesmoke;
 }
 
 #checkout-cart thead{
@@ -51,4 +59,75 @@
     font-size: 20px;
     margin: auto;
     width: 22% !important;
+}
+
+#checkout-order-form label{
+    display: inline-block;
+    width: 46px;
+}
+
+#pricing{
+    font-size: 150%;
+    font-weight: bolder;
+    color: darkgreen;
+}
+
+#submit-order{
+    margin-left: 45%;
+    margin-top: 5%;
+    width: 12%;
+    padding: 1%;
+    background: indianred;
+    color: white;
+    border: 2px solid #BA536D;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 17px;
+}
+
+#checkout-order-form input{
+    margin: 10px;
+    padding: 6px;
+    border-radius: 3px;
+    width: 30%;
+    border: 1px solid darkgray;
+}
+
+#submit-address{
+    margin-left: 3% !important;
+    margin-left: 10% !important;
+    margin-top: 5%;
+    padding: 1%;
+
+}
+
+.order-main-forms{
+    display: flex !important;
+}
+
+.delivery-address{
+    width: 50%;
+    display: inline-block;
+}
+
+.section-payment{
+    width: 50%;
+}
+
+.payment-form label{
+    width: 20% !important;
+}
+
+.address-form, .payment-form{
+    padding-left: 2%;
+}
+
+.payment-form select{
+    padding: 1% 3% 1% 3%;
+    border-radius: 6px;
+}
+
+.success-msg{
+    display: none;
+    color: green;
 }
