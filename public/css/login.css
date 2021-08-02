@@ -1,19 +1,28 @@
 body {
-  background-image: url('/images/background.jpg');
+  background-image: url("../images/italian-food-background-1.jpg")!important;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family: 'Raleway-Light';
+}
+
+@font-face {
+  font-family: 'Raleway-Light';
+  src: url('../fonts/Raleway-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .container {
     width: 20%;
-    background-color:gray;
+    background-color:#c3c3c3;
     padding: 100px;
     padding-left: 150px;
     margin: auto;
     margin-top: 100px;
+    border-radius: 10px;
 }
 
 .container-top {
@@ -72,7 +81,7 @@ input[type=text], input[type=password] {
   
   /* Set a style for all buttons */
   button {
-    background-color: #04AA6D;
+    background-color: #b14446;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -82,7 +91,7 @@ input[type=text], input[type=password] {
 }
 
 .head {
-    color: #04AA6D;
+    color: #b14446;
     font-size: 30px;
     font-weight: bold;
 }
