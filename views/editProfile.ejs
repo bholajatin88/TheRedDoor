@@ -21,8 +21,9 @@
             Back Home
         </a>
         <div class="container">
-            <form action="/register" method="POST">
-                <label class="head">Register</label>
+            <form action="/editProfile?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT" >
+                <label class="head">Edit Profile</label>
                 <br><br>
                 <% if (error != false && error.invalidUsername) { %>
                     <div class="error">
@@ -64,8 +65,8 @@
                 <input type="text" placeholder="Enter Province" name="state" value='<%=form.state%>' required><br>
                 <label for="postalCode"><b>Postal Code*</b></label>
                 <input type="text" placeholder="Enter Postal Code" name="postalCode" value='<%=form.postalCode%>' required><br>
-                <button type="submit">Register and Login</button>
-                <a class="register" href="/login">Back To Login</a>
+                <input type="hidden" name="updateProfile" value="true">
+                <button type="submit">Update Profile</button>
             </form>
         </div>
     </body>

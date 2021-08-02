@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'), User = mongoose.model('user'), Address = mongoose.model('addresses');
 var { GetItemFromStore, RemoveItemFromStore, SetItemInStore } = require('../common/store');
 var addressController = require('./address-controller');
-var { GetInitial, GetBaseInitial } = require('../common/util');
+var { GetBaseInitial } = require('../common/util');
+const url = require('url');
 
 module.exports={
     Login: function(req, res) {
@@ -23,7 +24,15 @@ module.exports={
             } else {
                 if(results && results.length > 0) {
                     SetItemInStore(req, "userDetails", JSON.stringify(results[0]));
-                    res.render('home.ejs', {userInitial: GetInitial(results[0])});
+                    let queryObject = {};
+                    if(body.search) {
+                        queryObject = url.parse(req.body.search, true).query;
+                    }
+                    if(queryObject && queryObject.back) {
+                        res.redirect(queryObject.back);
+                    } else {
+                        res.render('home.ejs', GetBaseInitial(req));
+                    }
                 } else {
                     res.render('login.ejs', {error: "Invalid login username or password"});
                 }
@@ -70,7 +79,7 @@ module.exports={
                         User.create(user)
                         .then(function(newUser) {
                             SetItemInStore(req, "userDetails", JSON.stringify(newUser));
-                            res.render('home.ejs', {userInitial: GetInitial(newUser)});
+                            res.render('home.ejs', GetBaseInitial(req));
                         })
                         .catch(function(err) {
                             Address.deleteOne({_id: { $eq: address_id }})
@@ -113,7 +122,7 @@ module.exports={
                 throw err;
             } else {
                 if(results && results.length > 0) {
-                    res.render('register.ejs', {error: {invalidUsername: "Login Username or Email already exists."}, edit: true, form: body}); 
+                    res.render('editProfile.ejs', {error: {invalidUsername: "Login Username or Email already exists."}, edit: true, form: body}); 
                 } else {
                     let address = {
                         street: body.street.trim(),
@@ -140,7 +149,7 @@ module.exports={
                         })
                         .catch(function(err) {
                             if (err.name == 'ValidationError') {
-                                res.render('register.ejs', {error: err, edit: true, form: body});
+                                res.render('editProfile.ejs', {error: err, edit: true, form: body});
                             } else {
                                 throw err;
                             }
@@ -148,7 +157,7 @@ module.exports={
                     })
                     .catch(function(err) {
                         if (err.name == 'ValidationError') {
-                            res.render('register.ejs', {error: err.errors, edit: true, form: body});
+                            res.render('editProfile.ejs', {error: err.errors, edit: true, form: body});
                         } else {
                             throw err;
                         }
@@ -177,9 +186,8 @@ module.exports={
             }
             let registerInitial = GetBaseInitial(req);
             registerInitial["error"] = false;
-            registerInitial["edit"] = true;
             registerInitial["form"] = userDetails? userDetails : false;
-            res.render('register.ejs', registerInitial);
+            res.render('editProfile.ejs', registerInitial);
         }).catch(function(err) {
             throw err;
         });

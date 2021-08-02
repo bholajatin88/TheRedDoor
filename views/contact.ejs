@@ -5,13 +5,25 @@
 		<title>Contact Us</title>
 		<link href="css/contact.css" rel="stylesheet" type="text/css">
 		<link href="css/foodMenu.css" rel="stylesheet" type="text/css">
-		<style></style>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<script src="js/jquery-3.6.0.min.js"></script>
+		<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="js/foodMenu.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function(){
+                if ($('.error').length > 0) {
+                $('.error').remove();
+                }
+            }, 5000);
+            });
+        </script>
 	</head>
 <body class="bodyBackground">
 	<div class="navBg">
 		<nav class="navBar">
 			<img class="logoImg">
-			<span class="navLink">
+			<span class="foodMenuNavLink">
 				<a href="/home">Home</a>
 				<a href="/menu">Menu</a>
 				<a href="/about">About Us</a>
@@ -24,14 +36,21 @@
 				<% if(!userInitial && cartItems && cartItems.length > 0) { %>
 					<a href="/checkout">
 						<img class="cart-img" onclick="" src="images/cart.png">
-						<div class="cart-count"><%=cartCount%></div>
+						<div class="cart-count-menu"><%=cartCount%></div>
 					</a>
 				<% } %>
 			</div>
 			<% if(userInitial) { %>
-				<div class="bar"><%=userInitial%></div>
+				<div class="box">
+					<div class="menu-user-initial">
+						<%=userInitial%>
+						<% if(cartItems && cartItems.length > 0) { %>
+							<div class="bar-cart-count-menu"><%=cartCount%></div>
+						<% } %>
+					</div>
+				</div>
 			<% } %>
-			<ul class="menubar-list">
+			<ul class="menu-list">
 				<li class="mobile"><a href="/home">Home</a></li>
 				<li class="mobile"><a href="/menu">Menu</a></li>
 				<li class="mobile"><a href="/about">About Us</a></li>
@@ -39,12 +58,15 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<li><a href="/editprofile">Edit Profile</a></li>
+					<% if(cartItems && cartItems.length > 0) { %>
+						<li><a href="/checkout">View Cart</a></li>
+					<% } %>
+					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
 			</ul>
 		</nav>
-	</div>		
+	</div>
 	<table class="contact-in">
 		<tr class="contact-row">
 			<td class="contact-map">
@@ -53,11 +75,32 @@
 			</td>
 			<td class="contact-form">
 				<span>Contact us</span>
-				<form>
+				<form action="/contact" method="POST">
 					<br>
-					<input name="name"  class="contact-form-text" placeholder="Your Name" required><br>
-					<input name="Email"  class="contact-form-text" placeholder="Your Mail" required><br>
-					<textarea name="message" class="contact-form-textarea" placeholder="What's this about?" required></textarea><br>
+					<input name="name" value='<%=form.name%>'
+					class="contact-form-text" placeholder="Your Name" required><br>
+					<% if (error != false && error.name && error.name.message) { %>
+						<div class="error">
+							<%= error.name.message %>
+						</div>
+						<br>
+					<% } %>
+					<input name="email"  class="contact-form-text"
+					value='<%=form.email%>' placeholder="Your Mail" required><br>
+					<% if (error != false && error.email && error.email.message) { %>
+						<div class="error">
+							<%= error.email.message %>
+						</div>
+						<br>
+					<% } %>
+					<textarea name="message" class="contact-form-textarea" 
+					placeholder="What's this about?" required><%=form.message%></textarea><br>
+					<% if (error != false && error.message && error.message.message) { %>
+						<div class="error">
+							<%= error.message.message %>
+						</div>
+						<br>
+					<% } %>
 					<input type="submit" class="contact-form-butn" value="send message">
 				</form>
 				<div class="contact">
@@ -70,6 +113,32 @@
 				</div>
 			</td>
 		</tr>
+	</div>
+	<!-- The Modal -->
+	<% if(success) { %>
+		<input type="hidden" id="showModal" />
+	<% } %>
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+				<h4 class="Contact Message Response"></h4>
+				<button type="button" onclick="hide()" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="modal-desc">
+						<label for="qty">The message has been recorded.<br>
+							We will get back to you shortly!!</label>
+					</div>
+				</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" onclick="hide()" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

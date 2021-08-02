@@ -22,7 +22,16 @@ $(document).ready(function(){
                 data: selectedItem,
                 success: function(result){
                         $('.cart').html(result);
+                        $('.menu-user-initial').html(result);
                 }
         });
     });
+
+    if($('#showModal').length) {
+        $('#myModal').show();
+    }
+
+    hide = () => {
+        $('#myModal').hide();
+    }
 });

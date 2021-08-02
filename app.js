@@ -2,13 +2,13 @@ const express = require('express');
 const methodOverride = require('method-override');
 var path = require('path');
 var favicon = require('serve-favicon');
-var {Store, RemoveItemFromStore, GetItemFromStore} = require('./common/store');
+var {Store, RemoveItemFromStore} = require('./common/store');
 const port = 80;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
-//app.use(methodOverride('_method'));
+app.use(methodOverride('_method'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -19,6 +19,8 @@ require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
 require('./models/order-model');
 var orderController = require('./controllers/order-controller');
+require('./models/message-model');
+var contactController = require('./controllers/message-controller');
 require('./models/payment-model');
 var paymentController = require('./controllers/payment-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
@@ -48,11 +50,12 @@ app.get('/register', function(req, res) {
     let registerInitial = GetBaseInitial(req);
     registerInitial["error"] = false;
     registerInitial["form"] = false;
-    registerInitial["edit"] = false;
     res.render('register.ejs', registerInitial);
 });
 
-app.get('/editprofile', userController.getProfile);
+app.get('/editProfile', userController.getProfile);
+
+app.put('/editProfile', userController.UpdateUser);
 
 app.get('/menu', menuController.GetAllMenuItems);
 
@@ -61,7 +64,11 @@ app.get('/orders', function(req, res) {
 });
 
 app.get('/contact', function(req, res) {
-    res.render('contact.ejs', GetBaseInitial(req));
+    let initial = GetBaseInitial(req);
+    initial["error"] = false;
+    initial["form"] = false;
+    initial["success"] = false;
+    res.render('contact.ejs', initial);
 });
 
 app.get('/about', function(req, res) {
@@ -75,12 +82,10 @@ app.get('/logout', function(req, res) {
 
 app.post('/login', userController.Login);
 app.post('/register', function(req, res) {
-    if(req.body.updateProfile == 'true') {
-        userController.UpdateUser(req, res);
-    } else {
-        userController.Register(req, res);
-    }
+    userController.Register(req, res);
 });
+
+app.post('/contact', contactController.CreateMessage)
 
 app.post('/addItemToCart',function(req, res) {
     UpdateCart(req);
@@ -115,18 +120,15 @@ app.get('/checkout', function(req, res) {
 
 app.post("/placeOrder", function(req,res){
     paymentController.AddPayment(req.body["payment.type"]).then(payment=>{
-        console.log(payment);
         let order = CreateOrder(req, payment._id);
-        console.log(order);
         orderController.AddOrder(order).then(function(order){
-            console.log(order);
             res.render('orderDetails.ejs');
             
         }).catch(function(err){
-            console.log(err);
+            throw err;
         });
     }).catch(function(err){
-        console.log(err);
+        throw err;
     });
     
 });

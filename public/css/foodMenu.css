@@ -46,6 +46,10 @@
 		display: none !important;
 	}
 
+	[class="navLink foodMenuNavLink"] {
+		display: none !important;
+	}
+
 	[class="menu-item-selected mobile"]
 	{
 		display: block !important;
@@ -206,15 +210,23 @@
     margin-left: 0.5%;
 }
 
-[class="bar"] {
+[class="box"] {
 	display: table-cell !important;
 }
 
-.bar:hover + .menubar-list{
+.box:hover + .menubar-list {
 	display: table-cell !important;
 }
 
 .menubar-list:hover {
+	display: table-cell !important;
+}
+
+.box:hover + .menu-list {
+	display: table-cell !important;
+}
+
+.menu-list:hover {
 	display: table-cell !important;
 }
 
@@ -225,7 +237,7 @@
 	color: #595959;
 }
 	
-.menu-content{
+.menu-content {
 	display: block;
     padding: 30px;
 }
@@ -418,7 +430,7 @@
 	border-radius: 50px;
 }
 
-.cart-count {
+.cart-count-menu {
 	cursor: pointer;
     width: 20px;
     height: 20px;
@@ -434,6 +446,71 @@
     z-index: 2;
     top: 5px;
     right: -20%;
+}
+
+.cart-count {
+	cursor: pointer;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 5%;
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid blue;
+    text-align: center;
+    color: pink;
+    background: blue;
+    font-weight: bolder;
+    font-size: 12px;
+    z-index: 2;
+    top: 3px;
+}
+
+.bar-cart-count {
+	cursor: pointer;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    padding: 2px;
+    border-radius: 50px;
+    border: 1px solid blue;
+    text-align: center;
+    color: pink;
+	font-family: 'Times New Roman', Times, serif;
+    background: blue;
+    font-weight: bolder;
+    font-size: 11px;
+    z-index: 50;
+    top: -4px;
+    right: -5px;
+}
+
+.box {
+	width: 80px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	height: 60px;
+	z-index: 1000;
+}
+
+.bar-cart-count-menu {
+	cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    padding: 2px;
+    border-radius: 50px;
+	font-family: 'Times New Roman', Times, serif;
+    border: 1px solid blue;
+    text-align: center;
+    color: pink;
+    background: blue;
+    font-weight: bold;
+    font-size: 10px;
+    z-index: 50;
+    top: -5px;
+    right: -5px;
 }
 
 .bar {
@@ -470,6 +547,20 @@
   position:absolute;
   right: 8px;
   top: 60px;
+}
+
+.menu-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 140px;
+	height:fit-content;
+	background-color: gray;
+	color:#cc0000;
+	display: none;
+	position:absolute;
+	right: 8px;
+	top: 60px;
 }
 
 .right {
@@ -516,19 +607,62 @@ a.itemNameLink:hover {
 	margin-left: 0.5rem;
 }
 
-.foodMenuNavLink a{
-	padding: 16px 40px 15px 40px;
+.foodMenuNavLink {
+	width: 90%;
+	position: absolute;
+	left: 160px;
 }
 
-.menu-user-initial{
+.foodMenuNavLink a:hover{
+	color: white;
+	text-decoration: none;
+}
+
+.foodMenuNavLink a{
+	font-family: 'Raleway-Light';
+    color: white;
+    font-size: 20px;
+	padding: 16px 40px 15px 40px;
+	font-weight: bold;
+    text-decoration-line: none;
+    display: table-cell;
+	white-space: nowrap;
+}
+
+.menu-user-initial {
+	cursor: pointer;
+	width: 40px;
+    height: 40px;
+	position: absolute;
+    right: 20px;
+	padding: 5px;
+	border-radius: 50px;
+	border: 1px solid black;
+	text-align: center;
+	color: pink;
+    background: black;
+	font-weight: bold;
+	font-size: 35px;
+    z-index: 2;
+	top: 6px;
 	width: 52px;
     height: 52px;
     font-family: "Times New Roman";
 	padding:0;
 }
 
-.food-menu-bar-list li{
-    width: 100%;
-    padding-top: 5px;
-    height: 44px;
+.menu-list li {
+	text-align: center;
+	width: 100%;
+    vertical-align: middle;
+    padding: 8px;
+    border: 3px solid black;
+    text-align: center;
+}
+
+.menu-list li a {
+	font-family: 'Raleway-Light';
+	color: white;
+	padding: 8px 16px;
+	text-decoration-line: none;
 }

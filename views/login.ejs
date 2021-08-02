@@ -10,6 +10,10 @@
                 if ($('.error').length > 0) {
                 $('.error').remove();
                 }
+                var search = window.location.search;
+                if(search) {
+                    $('#search').val(search);
+                }
             }, 3000);
             });
         </script>
@@ -30,6 +34,7 @@
                     </div>
                 <% } %>
                 <label for="username"><b>Username or email</b></label>
+                <input type="hidden" name="search" id="search" />
                 <input type="text" placeholder="Enter Username" name="username" required>
             
                 <label for="password"><b>Password</b></label>

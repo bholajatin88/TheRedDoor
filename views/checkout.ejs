@@ -22,7 +22,9 @@
 				<% } %>
 			</span>
 			<% if(userInitial) { %>
-				<div class="bar"><%=userInitial%></div>
+                <div class="box">
+				    <div class="bar"><%=userInitial%></div>
+                </div>
 			<% } %>
 			<ul class="menubar-list">
 				<li class="mobile"><a href="/home">Home</a></li>
@@ -32,7 +34,7 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<li><a href="/editprofile">Edit Profile</a></li>
+					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
 			</ul>
@@ -47,24 +49,31 @@
                     <a href="/menu" class="back">Order Now</a>
                 </div>
             <% } else { %>
-                <table id="checkout-cart" class="shopping-cart">
-                    <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <% for(let i=0;i<cartItems.length;i++) { %>
-                            <tr>
-                                <td><%= cartItems[i].item_name %></td>
-                                <td><%= cartItems[i].qty %></td>
-                                <td>$<%= cartItems[i].total_price %></td>
-                            </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                <form action="/removeItem" action="PUT">
+                    <table id="checkout-cart" class="shopping-cart">
+                        <thead>
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0;i<cartItems.length;i++) { %>
+                                <tr>
+                                    <td><%= cartItems[i].item_name %></td>
+                                    <td><%= cartItems[i].qty %></td>
+                                    <td>$<%= cartItems[i].total_price %></td>
+                                    <td>
+                                        <input type="hidden" name="index" value="$<%= i %>">
+                                        <button type="button"><img src="images/cross-icon.png"></button>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </form>
                 <div id="pricing">
                     <p id="sub-total">
                     <strong>Order Total</strong>: <span id="stotal">$<%=cart_total%></span>
@@ -106,12 +115,14 @@
                                 </select>
                             
                         </div>
+                        <button type="button" id="submit-order" class="btn btn-danger">Place Order</button>
                     </div>
                 </div>
                     <button type="submit" id="submit-order" class="btn btn-danger">Place Order</button>
                 </div></form>
-            
-                <%}%>
+                <%} else { %>
+                    <a href="/login?back=/checkout" class="btn btn-danger login">Login and Checkout</a>
+                <% } %>
             <% } %>
         </div>
 	</main>

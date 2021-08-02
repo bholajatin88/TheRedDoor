@@ -27,7 +27,13 @@
 				<% } %>
 			</div>
 			<% if(userInitial) { %>
-				<div class="bar"><%=userInitial%></div>
+				<div class="box">
+					<div class="bar"><%=userInitial%>
+						<% if(cartItems && cartItems.length > 0) { %>
+							<div class="bar-cart-count"><%=cartCount%></div>
+						<% } %>
+					</div>
+				</div>
 			<% } %>
 			<ul class="menubar-list">
 				<li class="menu-item-selected mobile"><a href="/home">Home</a></li>
@@ -37,7 +43,10 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<li><a href="/editprofile">Edit Profile</a></li>
+					<% if(cartItems && cartItems.length > 0) { %>
+						<li><a href="/checkout">View Cart</a></li>
+					<% } %>
+					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
 			</ul>

@@ -1,6 +1,11 @@
 <% if(!userInitial && cartCount > 0) { %>
     <a href='/checkout'>
-        <img class='cart-img' src="images/cart.png">
-        <div class="cart-count"><%= cartCount %></div>
+        <img class='cart-img' src='images/cart.png'>
+        <div class='cart-count-menu'><%=cartCount%></div>
     </a>
+<% } else { %>
+    <%=userInitial%>
+    <% if(cartItems && cartItems.length > 0) { %>
+        <div class='bar-cart-count-menu'><%=cartCount%></div>
+    <% } %>
 <% } %>

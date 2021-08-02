@@ -67,6 +67,7 @@ input[type=text], input[type=password] {
 
   .error {
       color: red;
+      font-size: 20px;
   }
   
   /* Set a style for all buttons */

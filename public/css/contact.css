@@ -12,6 +12,10 @@
 	margin-top: 10%;
 }
 
+h3 {
+	font-size: 1rem !important;
+}
+
 .contact-map {
     width: 50%;
     height: auto;
@@ -40,7 +44,7 @@
 	font-size: 350%;
 }
 .contact-form-text{
-	width:80%;
+	width:90%;
 	color:#000;
 	height:40px;
 	flex:25px;
@@ -57,7 +61,7 @@
 
 .contact-form-textarea{
 	margin: 1%;
-	width:78%;
+	width:90%;
 	color:#000;
 	height:130px;
 	flex:50%;
@@ -74,6 +78,14 @@
 	color:#cc0000;
 }
 
+.error {
+	color: red;
+	text-align: left;
+    margin-left: 10%;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
 .contact-form-butn{
 	outline:none;
 	border-radius:50px;
@@ -82,8 +94,8 @@
 	text-transform:uppercase;
 	padding:5px 10px;
 	cursor:pointer;
-	font-size:10px;
-	width: 80%;
+	font-size:20px;
+	width: 90%;
 }
 
 @media only screen and (max-width: 360px) {
