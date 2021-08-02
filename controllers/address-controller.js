@@ -29,7 +29,6 @@ module.exports={
                 initial["error"] = false;
                 res.render('address.ejs', initial);
             }).catch(function(err) {
-                console.log(err);
                 throw err;
             });
         }
