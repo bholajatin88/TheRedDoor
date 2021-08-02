@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#submit-address").click(function(){
+    $(document).on('click',"#submit-address", function(){
         var address = {
             _id: $("#addressId").val(),
             street: $("#street").val(),
