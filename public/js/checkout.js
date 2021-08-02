@@ -11,10 +11,7 @@ $(document).ready(function(){
         $.ajax({
             url: "/updateAddress",
             type: "PUT",
-            data: address,
-            success: function(result){
-                    
-            }
+            data: address
          }).done(function(data){
             $(".address-form").html(data);
             $('.success-msg').show();
@@ -23,4 +20,4 @@ $(document).ready(function(){
             },3000);
          });
     });
-});
+}); 

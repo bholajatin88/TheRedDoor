@@ -97,19 +97,19 @@
                     <div class="section-payment">
                         <h2>Order Payment Details</h2>
                         <div class="payment-form">
-                            <form action="" method="POST">
+                            <form action="/placeOrder" method="POST">
                                 <label for="payment.type">Payment Type:</label>
                                 <select type="text" name="payment.type">
                                     <option value="" disabled selected>Select your option</option>
                                     <option value="Net Banking">Net Banking</option>
                                     <option value="Cash">Cash</option>
                                 </select>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
-                    <button type="button" id="submit-order" class="btn btn-danger">Place Order</button>
-                </div>
+                    <button type="submit" id="submit-order" class="btn btn-danger">Place Order</button>
+                </div></form>
             
                 <%}%>
             <% } %>
