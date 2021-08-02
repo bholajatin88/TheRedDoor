@@ -21,6 +21,7 @@ module.exports={
             
         });
     },
+
     GetCheckout:  function(req, res) {
         let initial = GetBaseInitial(req);
         let addressId = GetAddressId(req);
@@ -41,5 +42,10 @@ module.exports={
             initial["address_details"] = null;
             res.render('checkout.ejs', initial);
         }
+    },
+
+    AddOrder: function(order){
+
+        return Order.create(order);
     }
 }
