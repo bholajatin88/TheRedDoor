@@ -21,3 +21,23 @@ $(document).ready(function(){
          });
     });
 }); 
+
+function removeItem(id){
+    $.ajax({
+        url: "/removeItem",
+        type: "PUT",
+        data: {
+            index: id
+        }
+     }).done(function(data){
+        let rowCount = $(data).filter('table').length
+         if(rowCount == 0) {
+            $('main').html("<div id='site'><h1 class='bold'>Checkout</h1>"
+            + "<div class='no-items'>Add Items in cart to checkout!!</div>"
+            + "<div class='backBtn'><a href='/menu' class='back'>Order Now</a>"
+            + "</div>")
+         } else {
+            $("#table-div").html(data);
+         }
+     });
+}

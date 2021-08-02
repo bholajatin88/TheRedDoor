@@ -1,4 +1,4 @@
-var { GetItemFromStore, SetItemInStore, RemoveItemFromStore } = require('./store');
+var { GetItemFromStore, SetItemInStore, GetBaseInitial, RemoveItemFromStore } = require('./store');
 
 module.exports.GetInitial = (userDetails) => {
     try {
@@ -54,8 +54,18 @@ let selectedItem = req.body;
     if(currentItems) {
         cartItems = [...currentItems];
     }
+    selectedItem["total_price"] = (Math.round(parseFloat(selectedItem["total_price"]) * 100)/100).toString();
     cartItems.push(selectedItem);
     SetItemInStore(req, "cart", JSON.stringify(cartItems));
+}
+
+module.exports.RemoveItem = (req, res) => {
+    let initial = this.GetBaseInitial(req);
+    initial["cartItems"] = initial["cartItems"].filter((item, index) => index != parseInt(req.body.index));
+    SetItemInStore(req, "cart", JSON.stringify(initial.cartItems));
+    let cartTotal = this.GetCartTotal(initial.cartItems);
+    initial["cart_total"] = cartTotal;
+    res.render('checkout-cart.ejs', initial);
 }
 
 module.exports.GetCartCount = (cartItems) => {
@@ -73,7 +83,7 @@ module.exports.GetCartTotal = (cartItems) =>{
     let cartTotal = 0;
     if(cartItems && cartItems.length > 0) {
         cartItems.forEach(cartItem => {
-            cartTotal += parseInt(cartItem.total_price);
+            cartTotal += parseFloat(cartItem.total_price);
         });
     }
     return cartTotal;

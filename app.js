@@ -24,7 +24,8 @@ var contactController = require('./controllers/message-controller');
 require('./models/payment-model');
 var paymentController = require('./controllers/payment-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var { GetBaseInitial, UpdateCart, GetCartTotal, GetAddressId, CreateOrder, EmptyCart } = require('./common/util');
+var { GetBaseInitial, UpdateCart, GetCartTotal, 
+    GetAddressId, CreateOrder, EmptyCart, RemoveItem } = require('./common/util');
 const addressController = require('./controllers/address-controller');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
@@ -108,12 +109,14 @@ app.get('/checkout', function(req, res) {
                 addressDetails = userAddress[0];
             }
             initial["address_details"] = addressDetails;
+            initial["error"] = false;
                     
             res.render('checkout.ejs', initial);
         });   
     }
     else{
         initial["address_details"] = null;
+        initial["error"] = false;
         res.render('checkout.ejs', initial);
     }
 });
@@ -128,8 +131,27 @@ app.post("/placeOrder", function(req,res){
         }).catch(function(err){
             throw err;
         });
-    }).catch(function(err){
-        throw err;
+    }).catch(function(err) {
+        if (err.name == 'ValidationError') {
+            let initial = GetBaseInitial(req);
+            let addressId = GetAddressId(req);
+            let cartTotal = GetCartTotal(initial.cartItems);
+            initial["cart_total"] = cartTotal;
+            if(addressId){
+                var addressDetails;
+                addressController.GetAddress(addressId).then(function(userAddress) {
+                    if(userAddress) {
+                        addressDetails = userAddress[0];
+                    }
+                    initial["address_details"] = addressDetails;
+                    initial["error"] = err.errors;
+                    console.log(err.errors.payment_type);
+                    res.render('checkout.ejs', initial);
+                });   
+            }
+        } else {
+            throw err;
+        }
     });
     
 });
@@ -142,7 +164,9 @@ app.delete("/deleteOrder", function(req,res){
     orderController.DeleteOrder(req,res);
 });
 
-
+app.put('/removeItem', function(req, res) {
+    RemoveItem(req, res);
+});
 
 // middleware to catch exceptions
 app.use(function(error, req, res, next) {

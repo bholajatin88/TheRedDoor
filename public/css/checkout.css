@@ -9,6 +9,14 @@
     opacity: 97%;
 }
 
+.error {
+	color: red;
+	text-align: left;
+    margin-left: 5%;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
 .login {
     padding-left: 10px;
     text-decoration: none;
@@ -20,6 +28,16 @@
     color: white;
     text-align: center;
     margin-top: 10px;
+}
+
+.remove-item {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+.index {
+    padding-left: 30px;
 }
 
 #site > * {
@@ -51,8 +69,13 @@
     line-height: 25px;
 }
 
+.action {
+    width: 150px;
+}
+
 #checkout-cart {
     margin-top: 25px;
+    width: 100%;
     border: 1px solid black;
     padding: 1%;
     line-height: 1.5;
