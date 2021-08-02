@@ -47,6 +47,8 @@
 
 .bold {
     font-size: 45px;
+    display: inline;
+    margin-left: 10% !important;
 }
 
 .backBtn {
@@ -119,6 +121,20 @@
     border-radius: 5px;
     font-weight: bolder;
     font-size: 17px;
+}
+
+#emptyBtn{
+    margin-top: 2%;
+    float:right;
+    margin-right: 10%;
+    width: 12%;
+    padding: 1%;
+    background: indianred;
+    color: white;
+    border: 2px solid #BA536D;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 12px;
 }
 
 #checkout-order-form input{
