@@ -52,9 +52,11 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<% if(cartItems && cartItems.length > 0) { %>
-						<li><a href="/checkout">View Cart</a></li>
-					<% } %>
+					<div id="cart-count">
+						<% if(cartItems && cartItems.length > 0) { %>
+							<li><a href="/checkout">View Cart</a></li>
+						<% } %>
+					</div>
 					<li class="mobile"><a href="/orderDetails">Orders</a></li>
 					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>

@@ -22,6 +22,7 @@ $(document).ready(function(){
                 data: selectedItem,
                 success: function(result){
                         $('.cart').html(result);
+                        $('#cart-count').html("<li><a href='/checkout'>View Cart</a></li>");
                         $('.menu-user-initial').html(result);
                 }
         });

@@ -61,7 +61,11 @@ let selectedItem = req.body;
 
 module.exports.RemoveItem = (req, res) => {
     let initial = this.GetBaseInitial(req);
-    initial["cartItems"] = initial["cartItems"].filter((item, index) => index != parseInt(req.body.index));
+    if(!req.body.index) {
+        initial["cartItems"] = [];
+    } else {
+        initial["cartItems"] = initial["cartItems"].filter((item, index) => index != parseInt(req.body.index));
+    }
     SetItemInStore(req, "cart", JSON.stringify(initial.cartItems));
     let cartTotal = this.GetCartTotal(initial.cartItems);
     initial["cart_total"] = cartTotal;
