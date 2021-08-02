@@ -18,7 +18,6 @@ module.exports={
         Address.updateOne({_id: {$eq: address_id}},addressDetails).then(function(newAddress){
             let initial = GetBaseInitial(req);
             initial["address_details"] = addressDetails;
-            console.log(addressDetails);
             res.render('address.ejs', initial);
         });
     }

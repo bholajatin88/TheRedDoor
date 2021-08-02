@@ -120,18 +120,15 @@ app.get('/checkout', function(req, res) {
 
 app.post("/placeOrder", function(req,res){
     paymentController.AddPayment(req.body["payment.type"]).then(payment=>{
-        console.log(payment);
         let order = CreateOrder(req, payment._id);
-        console.log(order);
         orderController.AddOrder(order).then(function(order){
-            console.log(order);
             res.render('orderDetails.ejs');
             
         }).catch(function(err){
-            console.log(err);
+            throw err;
         });
     }).catch(function(err){
-        console.log(err);
+        throw err;
     });
     
 });

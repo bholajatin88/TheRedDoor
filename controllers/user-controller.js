@@ -6,7 +6,6 @@ const url = require('url');
 
 module.exports={
     Login: function(req, res) {
-        console.log(req.body);
         var body = req.body;
         var username = body.username.trim();
         User.find({
