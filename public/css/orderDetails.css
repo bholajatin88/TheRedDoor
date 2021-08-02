@@ -26,6 +26,44 @@
     margin:auto;
 }
 
+.no-items {
+    vertical-align: middle;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    font-size: 20px;
+    margin: auto;
+    width: 22% !important;
+    text-align: center;
+}
+
+.backBtn {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 100px;
+    color: indianred;
+}
+
+.back {
+    text-decoration: none;
+    width: 115px;
+    height: 25px;
+    background: indianred;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.cancel-btn{
+    color: white;
+    background: indianred;
+    border: 1px solid darkred;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .order-table {
     margin-top: 25px;
     border: 1px solid black;

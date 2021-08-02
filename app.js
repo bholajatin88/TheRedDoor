@@ -24,7 +24,8 @@ var contactController = require('./controllers/message-controller');
 require('./models/payment-model');
 var paymentController = require('./controllers/payment-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var { GetBaseInitial, UpdateCart, GetCartTotal, GetAddressId, CreateOrder, RemoveItem } = require('./common/util');
+var { GetBaseInitial, UpdateCart, GetCartTotal, 
+    GetAddressId, CreateOrder, EmptyCart, RemoveItem } = require('./common/util');
 const addressController = require('./controllers/address-controller');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
@@ -124,6 +125,7 @@ app.post("/placeOrder", function(req,res){
     paymentController.AddPayment(req.body["payment.type"]).then(payment=>{
         let order = CreateOrder(req, payment._id);
         orderController.AddOrder(order).then(function(order){
+            EmptyCart(req);
             res.redirect('/orderDetails');
             
         }).catch(function(err){
@@ -155,6 +157,10 @@ app.post("/placeOrder", function(req,res){
 
 app.get("/orderDetails", function(req,res){
     orderController.GetAllOrders(req,res);
+});
+
+app.delete("/deleteOrder", function(req,res){
+    orderController.DeleteOrder(req,res);
 });
 
 app.put('/removeItem', function(req, res) {
