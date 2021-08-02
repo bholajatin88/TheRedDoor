@@ -80,7 +80,6 @@
                         <h2>Order Delivery Address</h2>
                         <div class="address-form">
                             <form>
-                                <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" value="<%=address_details._id%>" id="addressId">
                                 <label for="address.street">Line 1:</label>
                                 <input type="text" id="street" name="address.street" value="<%=address_details.street%>"><br>
@@ -92,7 +91,7 @@
                                 <input type="text" id="state" name="address.state" value="<%=address_details.state%>"> <br>
                                 <label for="address.zip">Zip:</label>
                                 <input type="text" id="zip" name="address.zip" value="<%=address_details.zip%>"> <br>
-                                <div class="success-msg">Update successfully!</div>
+                                <div class="success-msg">Updated successfully!</div>
                                 <button type="button" id="submit-address" >Update Address</button>
                             </form>
                         </div>
