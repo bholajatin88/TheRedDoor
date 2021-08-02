@@ -1,4 +1,4 @@
-var { GetItemFromStore, SetItemInStore } = require('./store');
+var { GetItemFromStore, SetItemInStore, RemoveItemFromStore } = require('./store');
 
 module.exports.GetInitial = (userDetails) => {
     try {
@@ -88,4 +88,8 @@ module.exports.GetAddressId = (req) =>{
 module.exports.GetUserId = (req) =>{
     let userId = JSON.parse(GetItemFromStore(req, "userDetails"))._id;
     return userId;
+}
+
+module.exports.EmptyCart = (req) =>{
+    RemoveItemFromStore(req, 'cart');
 }

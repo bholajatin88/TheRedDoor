@@ -14,10 +14,8 @@ module.exports={
         Order.find({user_id:userId},function(err, result){
             if(err) { throw err;}
             else{
-                console.log(result);
                 var userInitial = GetUserInitial(req);
                 userInitial["order_details"] = result;
-                console.log(userInitial);
                 res.render("orderDetails.ejs",userInitial);
             }
             
@@ -49,5 +47,14 @@ module.exports={
     AddOrder: function(order){
 
         return Order.create(order);
+    },
+
+    DeleteOrder: function(req,res){
+        Order.findByIdAndDelete(req.body.order_id,function(err,result){
+            if(err) { throw err;}
+            else{
+                res.redirect("/orderDetails");
+            }
+        });
     }
 }
