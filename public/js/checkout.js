@@ -1,12 +1,12 @@
 $(document).ready(function(){
     $(document).on('click',"#submit-address", function(){
         var address = {
-            _id: $("#addressId").val(),
-            street: $("#street").val(),
-            address_line_2: $("#line2").val(),
-            city: $("#city").val(),
-            state: $("#state").val(),
-            zip: $("#zip").val()
+            _id: $("#addressId").val().trim(),
+            street: $("#street").val().trim(),
+            address_line_2: $("#line2").val().trim(),
+            city: $("#city").val().trim(),
+            state: $("#state").val().trim(),
+            zip: $("#zip").val().trim()
         }
         $.ajax({
             url: "/updateAddress",

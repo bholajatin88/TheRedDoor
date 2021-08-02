@@ -35,7 +35,7 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-                    <li class="mobile"></li><a href="/orderDetails">Orders</a></li>
+                    <li class="mobile"><a href="/orderDetails">Orders</a></li>
 					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
@@ -43,7 +43,7 @@
 		</nav>
 	</div>
 	<main>
-		<div id="site">
+		<div id="site" class="site">
             <h1 class="bold">Order Details</h1>
             <% if(!order_details || order_details.length == 0) { %>
                 <div class="no-items">No orders found!!</div>

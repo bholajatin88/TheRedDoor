@@ -26,6 +26,12 @@ h3 {
     flex: 50%;
 }
 
+@media only screen and (max-width: 1070px) {
+	[class="contact-in"]{
+		margin-top: 60% !important;
+	}
+}
+
 .contact-form{
 	box-sizing:border-box;
 	width: 80%;
@@ -109,6 +115,7 @@ h3 {
 		width: 95% !important;
 	}
 	[class="contact-in"]{
+		margin-top: 75% !important;
 		width: 100% !important;
 	}
 
@@ -119,12 +126,16 @@ h3 {
 		width: 100% !important;
 	}
 
+	[class="contact-in"]{
+		margin-top: 75% !important;
+	}
 }
 	
 @media only screen and (max-width: 770px) {
 	[class="contact-in"]{
-		margin-top: 25% !important;
+		margin-top: 75% !important;
 	}
+
 	[class*="contact"]{
 		display: block;
 	}

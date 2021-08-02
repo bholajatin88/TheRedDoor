@@ -9,7 +9,17 @@
     opacity: 97%;
 }
 
+@media only screen and (max-width: 1070px) {
+	[class="site"]{
+		width: 65% !important;
+	}
+}
 
+@media only screen and (max-width: 770px) {
+	[class="site"]{
+		width: 50% !important;
+	}
+}
 
 #site > * {
     width: 90%;

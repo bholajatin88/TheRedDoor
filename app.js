@@ -145,7 +145,6 @@ app.post("/placeOrder", function(req,res){
                     }
                     initial["address_details"] = addressDetails;
                     initial["error"] = err.errors;
-                    console.log(err.errors.payment_type);
                     res.render('checkout.ejs', initial);
                 });   
             }
