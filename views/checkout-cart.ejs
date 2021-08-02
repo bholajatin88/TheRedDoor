@@ -1,0 +1,29 @@
+<% if(cartItems.length > 0) { %>
+    <table id="checkout-cart" class="shopping-cart">
+        <thead>
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Price</th>
+            <th class="action" scope="col">Remove Item</th>
+        </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0;i<cartItems.length;i++) { %>
+                <tr>
+                    <td><%= cartItems[i].item_name %></td>
+                    <td><%= cartItems[i].qty %></td>
+                    <td>$<%= cartItems[i].total_price %></td>
+                    <td class="index">
+                        <button id="removeBtn" onclick="removeItem('<%=i%>')" type="button"><img class="remove-item" src="images/cross-icon.png"></button>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <div id="pricing">
+        <p id="sub-total">
+        <strong>Order Total</strong>: <span id="stotal">$<%=cart_total%></span>
+        </p>
+    </div>
+<% } %>

@@ -36,12 +36,13 @@ module.exports={
                     addressDetails = userAddress[0];
                 }
                 initial["address_details"] = addressDetails;
-                        
+                intial["error"] = false;
                 res.render('checkout.ejs', initial);
             });
         }
         else{
             initial["address_details"] = null;
+            intial["error"] = false;
             res.render('checkout.ejs', initial);
         }
     },
