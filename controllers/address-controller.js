@@ -15,10 +15,23 @@ module.exports={
     UpdateAddress: function(req, res){
         let addressDetails = req.body;
         let address_id = mongoose.Types.ObjectId(addressDetails._id);
-        Address.updateOne({_id: {$eq: address_id}},addressDetails).then(function(newAddress){
+        let addressValidate = new Address(addressDetails);
+        let error = addressValidate.validateSync();
+        if(error) {
             let initial = GetBaseInitial(req);
             initial["address_details"] = addressDetails;
+            initial["error"] = error.errors;
             res.render('address.ejs', initial);
-        });
+        } else {
+            Address.updateOne({_id: {$eq: address_id}},addressDetails).then(function(newAddress){
+                let initial = GetBaseInitial(req);
+                initial["address_details"] = addressDetails;
+                initial["error"] = false;
+                res.render('address.ejs', initial);
+            }).catch(function(err) {
+                console.log(err);
+                throw err;
+            });
+        }
     }
 }

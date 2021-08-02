@@ -14,10 +14,8 @@ module.exports={
         Order.find({user_id:userId},function(err, result){
             if(err) { throw err;}
             else{
-                console.log(result);
                 var userInitial = GetUserInitial(req);
                 userInitial["order_details"] = result;
-                console.log(userInitial);
                 res.render("orderDetails.ejs",userInitial);
             }
             
