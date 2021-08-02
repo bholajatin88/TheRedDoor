@@ -95,3 +95,8 @@ module.exports.GetAddressId = (req) =>{
     if(userDetails)
         return userDetails.address_id;
 }
+
+module.exports.GetUserId = (req) =>{
+    let userId = JSON.parse(GetItemFromStore(req, "userDetails"))._id;
+    return userId;
+}

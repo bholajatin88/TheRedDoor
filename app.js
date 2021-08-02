@@ -123,8 +123,8 @@ app.get('/checkout', function(req, res) {
 app.post("/placeOrder", function(req,res){
     paymentController.AddPayment(req.body["payment.type"]).then(payment=>{
         let order = CreateOrder(req, payment._id);
-        orderController.AddOrder(order).then(function(order) {
-            res.render('orderDetails.ejs');
+        orderController.AddOrder(order).then(function(order){
+            res.redirect('/orderDetails');
             
         }).catch(function(err){
             throw err;
@@ -152,6 +152,10 @@ app.post("/placeOrder", function(req,res){
         }
     });
     
+});
+
+app.get("/orderDetails", function(req,res){
+    orderController.GetAllOrders(req,res);
 });
 
 app.put('/removeItem', function(req, res) {

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'), Order = mongoose.model('orders');
 var menuController = require('../controllers/menu-controller');
-var { GetUserInitial, GetBaseInitial, GetAddressId, GetCartTotal } = require('../common/util');
+var { GetUserInitial, GetBaseInitial, GetAddressId, GetCartTotal, GetUserId } = require('../common/util');
 
 module.exports={
     GetOrder: function(order_id) {
@@ -10,12 +10,14 @@ module.exports={
     },
 
     GetAllOrders: function(req, res){
-        Order.find({user_id:req.params.user_id},function(err, result){
+        let userId = GetUserId(req);
+        Order.find({user_id:userId},function(err, result){
             if(err) { throw err;}
             else{
-                let orderDetails = result.forEach(order => 
-                    order.order_items.forEach(menu=> {menu=menuController.GetMenuItem(menu._id)}));
+                console.log(result);
                 var userInitial = GetUserInitial(req);
+                userInitial["order_details"] = result;
+                console.log(userInitial);
                 res.render("orderDetails.ejs",userInitial);
             }
             

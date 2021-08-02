@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="UTF-8">
+		<title>Orders</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/foodMenu.css">
+    <link rel="stylesheet" href="css/orderDetails.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
+	<body class="bodyBackground">
+	<div class="navBg">
+		<nav class="navBar">
+			<img class="logoImg">
+			<span class="navLink">
+				<a href="/home">Home</a>
+				<a href="/menu">Menu</a>
+				<a href="/about">About Us</a>
+				<a href="/contact">Contact Us</a>
+				<% if(!userInitial) { %>
+					<a href="/login">Login/Register</a>
+				<% } else {%>
+                    <a href="/orderDetails" class="menu-item-selected">Orders</a>
+                <% } %>
+			</span>
+			<% if(userInitial) { %>
+                <div class="box">
+				    <div class="bar"><%=userInitial%></div>
+                </div>
+			<% } %>
+			<ul class="menubar-list">
+				<li class="mobile"><a href="/home">Home</a></li>
+				<li class="mobile"><a href="/menu">Menu</a></li>
+				<li class="mobile"><a href="/about">About Us</a></li>
+				<li class="mobile"><a href="/contact">Contact Us</a></li>
+				<% if(!userInitial) { %>
+					<li class="mobile"><a href="/login">Login/Register</a></li>
+				<% } else { %>
+                    <li class="mobile"></li><a href="/orderDetails">Orders</a></li>
+					<li><a href="/editProfile">Edit Profile</a></li>
+					<li><a href="/logout">LogOut</a></li>
+				<% } %>
+			</ul>
+		</nav>
+	</div>
+	<main>
+		<div id="site">
+            <h1 class="bold">Order Details</h1>
+            <% if(!order_details || order_details.length == 0) { %>
+                <div class="no-items">No orders found!!</div>
+                <div class="backBtn">	
+                    <a href="/menu" class="back">Order Now</a>
+                </div>
+            <% } else { %>
+                    <table class="order-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Items ordered</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0;i<order_details.length;i++) { %>
+                                <tr>
+                                    <td><%= new Date(order_details[i].order_date_time).toLocaleString(); %></td>
+                                    <td><%= order_details[i].order_total %></td>
+                                    <td><%= order_details[i].order_items.length %></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                <% } %>
+        </div>
+	</main>
+</body>
+</html>
