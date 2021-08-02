@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8">
+    <head>
 		<title>Checkout</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/home.css">
-	<link rel="stylesheet" href="css/foodMenu.css">
-    <link rel="stylesheet" href="css/checkout.css">
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/checkout.js"></script>
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/foodMenu.css">
+        <link rel="stylesheet" href="css/checkout.css">
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/checkout.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                setTimeout(function(){
+                if ($('.error').length > 0) {
+                $('.error').remove();
+                }
+            }, 10000);
+            });
+        </script>
+    </head>
 	<body class="bodyBackground">
 	<div class="navBg">
 		<nav class="navBar">
@@ -49,14 +60,14 @@
                     <a href="/menu" class="back">Order Now</a>
                 </div>
             <% } else { %>
-                <form action="/removeItem" action="PUT">
+                <div id="table-div">
                     <table id="checkout-cart" class="shopping-cart">
                         <thead>
                         <tr>
                             <th scope="col">Item</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Action</th>
+                            <th class="action" scope="col">Remove Item</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -65,19 +76,18 @@
                                     <td><%= cartItems[i].item_name %></td>
                                     <td><%= cartItems[i].qty %></td>
                                     <td>$<%= cartItems[i].total_price %></td>
-                                    <td>
-                                        <input type="hidden" name="index" value="$<%= i %>">
-                                        <button type="button"><img src="images/cross-icon.png"></button>
+                                    <td class="index">
+                                        <button id="removeBtn" onclick="removeItem('<%=i%>')" type="button"><img class="remove-item" src="images/cross-icon.png"></button>
                                     </td>
                                 </tr>
                             <% } %>
                         </tbody>
                     </table>
-                </form>
-                <div id="pricing">
-                    <p id="sub-total">
-                    <strong>Order Total</strong>: <span id="stotal">$<%=cart_total%></span>
-                    </p>
+                    <div id="pricing">
+                        <p id="sub-total">
+                        <strong>Order Total</strong>: <span id="stotal">$<%=cart_total%></span>
+                        </p>
+                    </div>
                 </div>
                 <% if(address_details!=null) {%>
                 
@@ -113,7 +123,12 @@
                                     <option value="Net Banking">Net Banking</option>
                                     <option value="Cash">Cash</option>
                                 </select>
-                            
+                                <% if (error != false && error.payment_type) { %>
+                                    <div class="error">
+                                        <%= error.payment_type %>
+                                    </div>
+                                    <br>
+                                <% } %>
                         </div>
                         <button type="button" id="submit-order" class="btn btn-danger">Place Order</button>
                     </div>
