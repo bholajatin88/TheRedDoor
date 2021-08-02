@@ -1,0 +1,42 @@
+#site {
+    background-color: lightgray;
+    width: 80%;
+    margin: auto;
+    margin-top: 200px;
+    min-height: 300px;
+    padding: 2%;
+    border-radius: 10px;
+    opacity: 97%;
+}
+
+
+
+#site > * {
+    width: 90%;
+    margin:auto;
+}
+
+
+
+
+.order-table {
+    margin-top: 25px;
+    border: 1px solid black;
+    padding: 1%;
+    line-height: 1.5;
+    font-size: 17px;
+    border-radius: 10px;
+    background: whitesmoke;
+}
+
+.order-table thead{
+    text-align: left;
+}
+
+
+
+
+
+
+
+

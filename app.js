@@ -122,7 +122,8 @@ app.post("/placeOrder", function(req,res){
     paymentController.AddPayment(req.body["payment.type"]).then(payment=>{
         let order = CreateOrder(req, payment._id);
         orderController.AddOrder(order).then(function(order){
-            res.render('orderDetails.ejs');
+            //orderController.GetAllOrders(req,res);
+            res.redirect('/orderDetails');
             
         }).catch(function(err){
             throw err;
@@ -131,6 +132,10 @@ app.post("/placeOrder", function(req,res){
         throw err;
     });
     
+});
+
+app.get("/orderDetails", function(req,res){
+    orderController.GetAllOrders(req,res);
 });
 
 

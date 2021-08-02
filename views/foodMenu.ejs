@@ -20,7 +20,9 @@
 				<a href="/contact">Contact Us</a>
 				<% if(!userInitial) { %>
 					<a href="/login">Login/Register</a>
-				<% } %>
+				<% } else {%>
+                    <a href="/orderDetails">Orders</a>
+                <% } %>
 			</span>
 			<% if(!userInitial) { %>
 				<div class="cart">
@@ -53,6 +55,7 @@
 					<% if(cartItems && cartItems.length > 0) { %>
 						<li><a href="/checkout">View Cart</a></li>
 					<% } %>
+					<li class="mobile"></li><a href="/orderDetails">Orders</a></li>
 					<li><a href="/editProfile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>

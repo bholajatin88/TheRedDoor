@@ -547,6 +547,7 @@
   position:absolute;
   right: 8px;
   top: 60px;
+  z-index: 50;
 }
 
 .menu-list {
@@ -575,6 +576,7 @@
 	border: 3px solid black;
 	height: 30px;
 	text-align: center;
+	z-index: 50;
 }
 
 .menubar-list li a {
@@ -649,6 +651,7 @@ a.itemNameLink:hover {
     height: 52px;
     font-family: "Times New Roman";
 	padding:0;
+	z-index: 50;
 }
 
 .menu-list li {
@@ -658,9 +661,11 @@ a.itemNameLink:hover {
     padding: 8px;
     border: 3px solid black;
     text-align: center;
+	z-index: 50;
 }
 
 .menu-list li a {
+	
 	font-family: 'Raleway-Light';
 	color: white;
 	padding: 8px 16px;
