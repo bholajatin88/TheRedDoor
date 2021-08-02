@@ -2,7 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 var path = require('path');
 var favicon = require('serve-favicon');
-var {Store, RemoveItemFromStore, GetItemFromStore} = require('./common/store');
+var {Store, RemoveItemFromStore} = require('./common/store');
 const port = 80;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));

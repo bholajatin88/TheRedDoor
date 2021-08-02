@@ -2,9 +2,11 @@ var mongoose = require('mongoose'), User = mongoose.model('user'), Address = mon
 var { GetItemFromStore, RemoveItemFromStore, SetItemInStore } = require('../common/store');
 var addressController = require('./address-controller');
 var { GetBaseInitial } = require('../common/util');
+const url = require('url');
 
 module.exports={
     Login: function(req, res) {
+        console.log(req.body);
         var body = req.body;
         var username = body.username.trim();
         User.find({
@@ -23,7 +25,15 @@ module.exports={
             } else {
                 if(results && results.length > 0) {
                     SetItemInStore(req, "userDetails", JSON.stringify(results[0]));
-                    res.render('home.ejs', GetBaseInitial(req));
+                    let queryObject = {};
+                    if(body.search) {
+                        queryObject = url.parse(req.body.search, true).query;
+                    }
+                    if(queryObject && queryObject.back) {
+                        res.redirect(queryObject.back);
+                    } else {
+                        res.render('home.ejs', GetBaseInitial(req));
+                    }
                 } else {
                     res.render('login.ejs', {error: "Invalid login username or password"});
                 }

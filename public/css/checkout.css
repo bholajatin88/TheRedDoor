@@ -9,6 +9,19 @@
     opacity: 97%;
 }
 
+.login {
+    padding-left: 10px;
+    text-decoration: none;
+    background: black;
+    width: 30% !important;
+    display: block;
+    padding-top: 10px;
+    height: 30px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
 #site > * {
     width: 90%;
     margin:auto;
