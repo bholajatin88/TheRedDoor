@@ -26,4 +26,12 @@ $(document).ready(function(){
                 }
         });
     });
+
+    if($('#showModal').length) {
+        $('#myModal').show();
+    }
+
+    hide = () => {
+        $('#myModal').hide();
+    }
 });

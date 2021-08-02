@@ -17,6 +17,8 @@ require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
 require('./models/order-model');
 var orderController = require('./controllers/order-controller');
+require('./models/contact-message-model');
+var contactController = require('./controllers/contact-message-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
 var { GetBaseInitial, UpdateCart } = require('./common/util');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
@@ -43,11 +45,12 @@ app.get('/register', function(req, res) {
     let registerInitial = GetBaseInitial(req);
     registerInitial["error"] = false;
     registerInitial["form"] = false;
-    registerInitial["edit"] = false;
     res.render('register.ejs', registerInitial);
 });
 
 app.get('/editprofile', userController.getProfile);
+
+app.put('/editprofile', userController.UpdateUser);
 
 app.get('/menu', menuController.GetAllMenuItems);
 
@@ -56,7 +59,11 @@ app.get('/orders', function(req, res) {
 });
 
 app.get('/contact', function(req, res) {
-    res.render('contact.ejs', GetBaseInitial(req));
+    let initial = GetBaseInitial(req);
+    initial["error"] = false;
+    initial["form"] = false;
+    initial["success"] = false;
+    res.render('contact.ejs', initial);
 });
 
 app.get('/about', function(req, res) {
@@ -70,12 +77,10 @@ app.get('/logout', function(req, res) {
 
 app.post('/login', userController.Login);
 app.post('/register', function(req, res) {
-    if(req.body.updateProfile == 'true') {
-        userController.UpdateUser(req, res);
-    } else {
-        userController.Register(req, res);
-    }
+    userController.Register(req, res);
 });
+
+app.post('/contact', contactController.CreateContactMessage)
 
 app.post('/addItemToCart',function(req, res) {
     UpdateCart(req);

@@ -177,9 +177,8 @@ module.exports={
             }
             let registerInitial = GetBaseInitial(req);
             registerInitial["error"] = false;
-            registerInitial["edit"] = true;
             registerInitial["form"] = userDetails? userDetails : false;
-            res.render('register.ejs', registerInitial);
+            res.render('editprofile.ejs', registerInitial);
         }).catch(function(err) {
             throw err;
         });

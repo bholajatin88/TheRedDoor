@@ -50,7 +50,9 @@
 				<% if(!userInitial) { %>
 					<li class="mobile"><a href="/login">Login/Register</a></li>
 				<% } else { %>
-					<li><a href="/checkout">View Cart</a></li>
+					<% if(cartItems && cartItems.length > 0) { %>
+						<li><a href="/checkout">View Cart</a></li>
+					<% } %>
 					<li><a href="/editprofile">Edit Profile</a></li>
 					<li><a href="/logout">LogOut</a></li>
 				<% } %>
@@ -178,8 +180,8 @@
 			
 		  </div>
 		</div>
-	  </div>
-	  <script>
+	</div>
+	<script>
 		$("input[type='number']").inputSpinner();
 	</script>
 </body>

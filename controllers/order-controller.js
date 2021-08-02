@@ -15,7 +15,6 @@ module.exports={
             else{
                 let orderDetails = result.forEach(order => 
                     order.order_items.forEach(menu=> {menu=menuController.GetMenuItem(menu._id)}));
-                console.log(orderDetails);
                 var userInitial = GetUserInitial(req);
                 res.render("orderDetails.ejs",userInitial);
             }
