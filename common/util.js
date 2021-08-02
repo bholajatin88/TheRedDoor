@@ -21,6 +21,21 @@ module.exports.GetUserInitial = (req) => {
     return { userInitial: this.GetInitial(userDetails) };
 }
 
+module.exports.CreateOrder = (req, payment_id) => {
+    let paymentId = payment_id;
+    let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
+    let cartItems = JSON.parse(GetItemFromStore(req, "cart"));
+    let cartTotal = this.GetCartTotal(cartItems);
+    let order = {
+        user_id: userDetails._id,
+        order_items: cartItems,
+        order_date_time:new Date(),
+        order_total: cartTotal,
+        payment_id: paymentId
+    }
+    return order;
+}
+
 module.exports.GetBaseInitial = (req) => {
     let cartItems = JSON.parse(GetItemFromStore(req, "cart"));
     let initial = this.GetUserInitial(req);
