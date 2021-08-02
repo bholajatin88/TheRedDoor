@@ -1,12 +1,14 @@
 const express = require('express');
+const methodOverride = require('method-override');
 var path = require('path');
 var favicon = require('serve-favicon');
-var {Store, RemoveItemFromStore} = require('./common/store');
+var {Store, RemoveItemFromStore, GetItemFromStore} = require('./common/store');
 const port = 80;
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
+//app.use(methodOverride('_method'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -20,7 +22,8 @@ var orderController = require('./controllers/order-controller');
 require('./models/contact-message-model');
 var contactController = require('./controllers/contact-message-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
-var { GetBaseInitial, UpdateCart } = require('./common/util');
+var { GetBaseInitial, UpdateCart, GetCartTotal, GetAddressId } = require('./common/util');
+const addressController = require('./controllers/address-controller');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 //common file to create db connection
@@ -87,10 +90,33 @@ app.post('/addItemToCart',function(req, res) {
     res.render('cart.ejs', GetBaseInitial(req));
 });
 
+app.put('/updateAddress', function(req, res){
+    addressController.UpdateAddress(req,res);  
+});
+
 app.get('/checkout', function(req, res) {
     let initial = GetBaseInitial(req);
-    res.render('checkout.ejs', initial);
+    let addressId = GetAddressId(req);
+    let cartTotal = GetCartTotal(initial.cartItems);
+    initial["cart_total"] = cartTotal;
+    if(addressId){
+        var addressDetails;
+        addressController.GetAddress(addressId).then(function(userAddress) {
+            if(userAddress) {
+                addressDetails = userAddress[0];
+            }
+            initial["address_details"] = addressDetails;
+                    
+            res.render('checkout.ejs', initial);
+        });   
+    }
+    else{
+        initial["address_details"] = null;
+        res.render('checkout.ejs', initial);
+    }
 });
+
+
 
 // middleware to catch exceptions
 app.use(function(error, req, res, next) {

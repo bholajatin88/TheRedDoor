@@ -52,3 +52,20 @@ module.exports.GetCartCount = (cartItems) => {
     }
     return cartCount;
 }
+
+
+module.exports.GetCartTotal = (cartItems) =>{
+    let cartTotal = 0;
+    if(cartItems && cartItems.length > 0) {
+        cartItems.forEach(cartItem => {
+            cartTotal += parseInt(cartItem.total_price);
+        });
+    }
+    return cartTotal;
+}
+
+module.exports.GetAddressId = (req) =>{
+    let userDetails = JSON.parse(GetItemFromStore(req, "userDetails"));
+    if(userDetails)
+        return userDetails.address_id;
+}
