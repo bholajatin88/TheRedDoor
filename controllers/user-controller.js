@@ -121,8 +121,8 @@ module.exports={
             if(err) {
                 throw err;
             } else {
-                if(results && results.length > 0) {
-                    res.render('editProfile.ejs', {error: {invalidUsername: "Login Username or Email already exists."}, edit: true, form: body}); 
+                if(!results || results.length == 0) {
+                    res.render('editProfile.ejs', {error: {invalidUsername: "Unable to fetch user details."}, edit: true, form: body}); 
                 } else {
                     let address = {
                         street: body.street.trim(),
