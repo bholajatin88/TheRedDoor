@@ -111,6 +111,7 @@
 }
 
 #submit-order{
+    cursor: pointer;
     margin-left: 45%;
     margin-top: 5%;
     width: 12%;
@@ -124,6 +125,7 @@
 }
 
 #emptyBtn{
+    cursor: pointer;
     margin-top: 2%;
     float:right;
     margin-right: 10%;

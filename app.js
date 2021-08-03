@@ -17,12 +17,12 @@ require('./models/user-model');
 var userController = require('./controllers/user-controller');
 require('./models/menu-model');
 var menuController = require('./controllers/menu-controller');
+require('./models/payment-model');
+var paymentController = require('./controllers/payment-controller');
 require('./models/order-model');
 var orderController = require('./controllers/order-controller');
 require('./models/message-model');
 var contactController = require('./controllers/message-controller');
-require('./models/payment-model');
-var paymentController = require('./controllers/payment-controller');
 var DbConnect = require('./models/common/db-connect').DbConnect;
 var { GetBaseInitial, UpdateCart, GetCartTotal, 
     GetAddressId, CreateOrder, EmptyCart, RemoveItem } = require('./common/util');
@@ -59,10 +59,6 @@ app.get('/editProfile', userController.getProfile);
 app.put('/editProfile', userController.UpdateUser);
 
 app.get('/menu', menuController.GetAllMenuItems);
-
-app.get('/orders', function(req, res) {
-    orderController.GetAllOrders(req,res);
-});
 
 app.get('/contact', function(req, res) {
     let initial = GetBaseInitial(req);
