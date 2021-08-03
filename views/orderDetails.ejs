@@ -65,7 +65,7 @@
                                 <tr>
                                     <td><%= new Date(order_details[i].order_date_time).toLocaleString(); %></td>
                                     <td><%= order_details[i].order_total %></td>
-                                    <td><%= order_details[i].order_items.length %></td>
+                                    <td><%= order_details[i].count %></td>
 									<td>
 									<% if(Math.round(Math.abs(new Date()-new Date(order_details[i].order_date_time))/60000) <15) {%>
 										<form action="/deleteOrder?_method=DELETE" method="POST">

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'), Order = mongoose.model('orders');
-var menuController = require('../controllers/menu-controller');
-var { GetUserInitial, GetBaseInitial, GetAddressId, GetCartTotal, GetUserId } = require('../common/util');
+var paymentController = require('./payment-controller');
+var { GetUserInitial, GetBaseInitial, GetAddressId, GetCartTotal, GetUserId, GetCartCount } = require('../common/util');
 
 module.exports={
     GetOrder: function(order_id) {
@@ -14,6 +14,11 @@ module.exports={
         Order.find({user_id:userId},function(err, result){
             if(err) { throw err;}
             else{
+                if(result) {
+                    for(let i=0;i<result.length;i++) {
+                        result[i]["count"] = GetCartCount(result[i].order_items);
+                    }
+                }
                 var userInitial = GetUserInitial(req);
                 userInitial["order_details"] = result;
                 res.render("orderDetails.ejs",userInitial);
@@ -46,7 +51,6 @@ module.exports={
     },
 
     AddOrder: function(order){
-
         return Order.create(order);
     },
 
@@ -54,7 +58,7 @@ module.exports={
         Order.findByIdAndDelete(req.body.order_id,function(err,result){
             if(err) { throw err;}
             else{
-                res.redirect("/orderDetails");
+                paymentController.DeletePayment(result.payment_id, res);
             }
         });
     }
