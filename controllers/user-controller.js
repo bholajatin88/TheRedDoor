@@ -131,37 +131,50 @@ module.exports={
                         city: body.city.trim(),
                         state: body.state.trim()
                     }
-                    var result = JSON.parse(GetItemFromStore(req, "userDetails"));
-                    Address.updateOne({_id: {$eq: result.address_id}},address).collation( { locale: 'en', strength: 1 })
-                    .then(function(newAddress) {
-                        let user = {
-                            username: username,
-                            email: email,
-                            phone: body.phone.trim(),
-                            password: body.password.trim(),
-                            address_id: result.address_id
-                        };
-                        User.updateOne({_id: {$eq: result._id}},user).collation( { locale: 'en', strength: 1 })
-                        .then(function(newUser) {
-                            RemoveItemFromStore(req, "userDetails");
-                            SetItemInStore(req, "userDetails", JSON.stringify(user));
-                            res.render('home.ejs', GetBaseInitial(req));
+
+                    let addressValidate = new Address(address);
+                    let error = addressValidate.validateSync();
+                    if(error) {
+                        res.render('editProfile.ejs', {error: error.errors, edit: true, form: body});
+                    } else {
+                        var result = JSON.parse(GetItemFromStore(req, "userDetails"));
+                        Address.updateOne({_id: {$eq: result.address_id}},address).collation( { locale: 'en', strength: 1 })
+                        .then(function(newAddress) {
+                            let user = {
+                                username: username,
+                                email: email,
+                                phone: body.phone.trim(),
+                                password: body.password.trim(),
+                                address_id: result.address_id
+                            };
+                            let userValidate = new User(user);
+                            let error = userValidate.validateSync();
+                            if(error) {
+                                res.render('editProfile.ejs', {error: error.errors, edit: true, form: body});
+                            } else {
+                                User.updateOne({_id: {$eq: result._id}},user).collation( { locale: 'en', strength: 1 })
+                                .then(function(newUser) {
+                                    RemoveItemFromStore(req, "userDetails");
+                                    SetItemInStore(req, "userDetails", JSON.stringify(user));
+                                    res.render('home.ejs', GetBaseInitial(req));
+                                })
+                                .catch(function(err) {
+                                    if (err.name == 'ValidationError') {
+                                        res.render('editProfile.ejs', {error: err, edit: true, form: body});
+                                    } else {
+                                        throw err;
+                                    }
+                                });
+                            }
                         })
                         .catch(function(err) {
                             if (err.name == 'ValidationError') {
-                                res.render('editProfile.ejs', {error: err, edit: true, form: body});
+                                res.render('editProfile.ejs', {error: err.errors, edit: true, form: body});
                             } else {
                                 throw err;
                             }
                         });
-                    })
-                    .catch(function(err) {
-                        if (err.name == 'ValidationError') {
-                            res.render('editProfile.ejs', {error: err.errors, edit: true, form: body});
-                        } else {
-                            throw err;
-                        }
-                    });
+                    }
                 }
             }
         }).collation( { locale: 'en', strength: 1 })
